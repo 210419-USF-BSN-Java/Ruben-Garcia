@@ -9,9 +9,10 @@ public class ConsoleUI {
 	public int loginView = 0; 
 	protected String password; 
 	
-	public void welcome() {
+	public ConsoleUI welcome() {
 		System.out.println("welcome, please login");
-		menuView = Integer.parseInt(sc.nextLine()); 
+		menuView = Integer.parseInt(sc.nextLine());
+		return null; 
 	}
 	
 	public void menuMaster() {

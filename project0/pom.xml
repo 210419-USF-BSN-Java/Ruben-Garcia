@@ -3,4 +3,17 @@
   <groupId>com.garcia.ruben.project0</groupId>
   <artifactId>projectZero</artifactId>
   <version>0.0.1-SNAPSHOT</version>
+  
+  <properties>
+		<maven.compiler.source>1.8</maven.compiler.source>
+		<maven.compiler.target>1.8</maven.compiler.target>
+	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.postgresql</groupId>
+			<artifactId>postgresql</artifactId>
+			<version>42.2.20</version>
+		</dependency>
+	</dependencies>
 </project>

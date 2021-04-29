@@ -1,14 +1,15 @@
 package models;
 
-public interface GenericUser {
-	public abstract void logIn(); 
-	public abstract void logout();
+public interface GenericUser { 
+	public Integer getId();
+	public void setId(Integer id); 
 	
-	public abstract void createUserAccount(); 
-	//on the fence about this, but whatever..
-	public abstract void whoseLoggedIn(); 
+	public String getFirstName(); 
+	public void setFirstName(String firstName); 
 	
-	public abstract void exit(); 
-	//Done, further review 
+	public String getLastName(); 
+	public void setLastName(String lastName); 
 	
+	public String getPassword(); 
+	public void setPassword(String password); 
 }

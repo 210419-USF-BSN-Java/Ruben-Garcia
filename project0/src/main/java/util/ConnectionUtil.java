@@ -20,6 +20,22 @@ public class ConnectionUtil {
 	return connection; 
     }
     
+    public static Connection getHardCodedConnection() throws SQLException
+	{
+
+		String url = "jdbc:postgresql://localhost:5432/project0";
+		String username = "postgres";
+		String password = "Noctis94.";
+
+		if(connection == null || connection.isClosed()) {
+		connection = DriverManager.getConnection(url, username, password);
+		}
+		
+		return connection;
+	}
+    
+    
+    
     
     
 }

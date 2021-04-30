@@ -128,6 +128,14 @@ public class Customer implements GenericUser, Serializable {
 			return false;
 		return true;
 	}
+
+	@Override
+	public String toString() {
+		return "Customer [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", password=" + password
+				+ ", userName=" + userName + "]";
+	}
+	
+	
 	
 	
 	

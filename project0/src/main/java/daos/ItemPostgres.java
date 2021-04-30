@@ -38,13 +38,14 @@ public class ItemPostgres implements ItemsDao {
 
 	@Override
 	public List<Item> getAll() {
-		String sql = "select * from items"; 
+		String sql = "select * from items";
 		List<Item> items = new ArrayList<>(); 
 		
 		try{
-			Connection c = ConnectionUtil.getConnectionFromEnv(); 
+			Connection c = ConnectionUtil.getHardCodedConnection(); 
 			Statement s = c.createStatement(); 
 			ResultSet rs = s.executeQuery(sql); 
+			//System.out.println(rs);
 			
 			while(rs.next()) {
 				int item_id = rs.getInt("item_id"); 
@@ -54,10 +55,11 @@ public class ItemPostgres implements ItemsDao {
 				items.add(new Item(item_id, item_name, item_statusOwned, item_price )); 
 				
 			}
+			System.out.println("item getall method executed");
 		}catch(SQLException e) {
 			e.printStackTrace(); 
 		}
-		return items;
+		return items;//working
 	}
 
 	@Override

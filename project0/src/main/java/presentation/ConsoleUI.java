@@ -1,8 +1,13 @@
 package presentation;
 import java.util.Scanner;
+import services.customerLogin;
 
 //public methods relating to the console
 public class ConsoleUI {
+	
+	public String testUserName = "user"; 
+	public String testPassword = "password";
+	public Boolean loggedIn = false; 
 	Scanner sc = new Scanner(System.in); 
 	protected String userName;
 	public int menuView = 0;
@@ -72,10 +77,28 @@ public class ConsoleUI {
 		System.out.println("input a username"); 
 		System.out.println("input a password"); 
 		//TODO create switch statement to chain UI experience for creating an account
-		
-		
-		
 	}
+	//TODO
+	//should be default user depending on what account they want to sign up for  
+	public Boolean customerLogin() {
+		Scanner sc = new Scanner(System.in); 
+    	System.out.println("please input username"); 
+    	String username = sc.nextLine(); 
+    	System.out.println("please input password"); 
+    	String password = sc.nextLine(); 
+  
+		customerLogin a = new customerLogin(); 
+		Boolean accessGranted = a.userAuth(username, password);
+		if(accessGranted == true) {
+    		System.out.println("login successful");
+    	}else {
+    		System.out.println("login unsuccessful"); 
+    	}
+		sc.close();
+		return accessGranted;
+	}
+	 
+	
 	
 	
 	

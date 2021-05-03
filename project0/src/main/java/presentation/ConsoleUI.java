@@ -1,6 +1,10 @@
 package presentation;
 import java.util.Scanner;
-import services.customerLogin;
+
+import models.Employee;
+import services.CustomerLogin;
+import services.ManagerLogin;
+import services.EmployeeLogin;
 
 //public methods relating to the console
 public class ConsoleUI {
@@ -65,10 +69,7 @@ public class ConsoleUI {
 	}
 	
 	public void login() {
-		System.out.println("please input your username"); 
-		userName = sc.nextLine(); 
-		System.out.println("please input your password"); 
-		password = sc.nextLine(); 
+		//TODO switch statement for several options , customer, manager, employee
 	}
 	
 	public void createAccountUI() {
@@ -87,7 +88,7 @@ public class ConsoleUI {
     	System.out.println("please input password"); 
     	String password = sc.nextLine(); 
   
-		customerLogin a = new customerLogin(); 
+		CustomerLogin a = new CustomerLogin(); 
 		Boolean accessGranted = a.userAuth(username, password);
 		if(accessGranted == true) {
     		System.out.println("login successful");
@@ -97,9 +98,40 @@ public class ConsoleUI {
 		sc.close();
 		return accessGranted;
 	}
-	 
 	
+	public Boolean EmployeeLogin() {
+		Scanner sc = new Scanner(System.in); 
+    	System.out.println("please input username"); 
+    	String username = sc.nextLine(); 
+    	System.out.println("please input password"); 
+    	String password = sc.nextLine(); 
+  
+		EmployeeLogin a = new EmployeeLogin(); 
+		Boolean accessGranted = a.userAuth(username, password);
+		if(accessGranted == true) {
+    		System.out.println("login successful");
+    	}else {
+    		System.out.println("login unsuccessful"); 
+    	}
+		sc.close();
+		return accessGranted;
+	}
 	
-	
-	
+	public Boolean ManagerLogin() {
+		Scanner sc = new Scanner(System.in); 
+    	System.out.println("Hello, you are trying to login in as an Manager. Please input your username"); 
+    	String username = sc.nextLine(); 
+    	System.out.println("please input password"); 
+    	String password = sc.nextLine(); 
+  
+		ManagerLogin a = new ManagerLogin(); 
+		Boolean accessGranted = a.userAuth(username, password);
+		if(accessGranted == true) {
+    		System.out.println("login successful");
+    	}else {
+    		System.out.println("login unsuccessful"); 
+    	}
+		sc.close();
+		return accessGranted;
+	}
 }

@@ -14,7 +14,7 @@ public class Manager implements GenericUser, Serializable {
 		super(); 
 	}
 
-	public Manager(Integer id, String firstName, String lastName, String userName, String password) {
+	public Manager(Integer id, String firstName, String userName, String password) {
 		super(); 
 		this.id = id; 
 		this.firstName = firstName; 

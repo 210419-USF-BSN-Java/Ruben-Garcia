@@ -13,6 +13,7 @@ public class MainMethod {
 	Scanner sc = new Scanner(System.in);
 	ConsoleUI welcome = new ConsoleUI().welcome(); 
 	*/
+    	/*
     	ItemPostgres item = new ItemPostgres(); 
     	
     	List<Item> li = item.getAll();
@@ -20,5 +21,11 @@ public class MainMethod {
     		System.out.println(i);
     		}
     	}
-    
+    	*/ 
+    	//Boolean customerLogin = new ConsoleUI().customerLogin(); 
+    	
+    	//Boolean employeeLogin = new ConsoleUI().EmployeeLogin(); 
+    	Boolean managerLogin = new ConsoleUI().ManagerLogin(); 
+    	
+    }
 }

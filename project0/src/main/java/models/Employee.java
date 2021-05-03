@@ -18,7 +18,7 @@ public class Employee implements GenericUser, Serializable{
 		super(); 
 	}
 
-	public Employee(Integer id, String firstName, String lastName, String userName, String password) {
+	public Employee(Integer id, String firstName, String userName, String password) {
 		super(); 
 		this.id = id; 
 		this.firstName = firstName; 

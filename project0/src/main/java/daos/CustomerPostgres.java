@@ -97,7 +97,6 @@ public class CustomerPostgres implements CustomerDao {
 	@Override
 	public Boolean checkforUsername(String t) {
 		String sql="Select * from customer where customer_username = ?";
-		Customer customer = null;
 		Boolean isInDatabase = null;  
 		
 		try {
@@ -106,12 +105,6 @@ public class CustomerPostgres implements CustomerDao {
 			p.setString(1,t); 
 			ResultSet rs = p.executeQuery(); 
 			if(rs.next()) {
-				int customer_id = rs.getInt("customer_id");
-				String username = rs.getString("customer_username"); 
-				String password = rs.getString("customer_password");
-				String firstname = rs.getString("customer_firstname"); 
-				String lastname = rs.getString("customer_lastname"); 
-				customer = new Customer(customer_id, firstname, lastname, password, username);
 				isInDatabase = true; 
 			}else {
 				isInDatabase = false; 

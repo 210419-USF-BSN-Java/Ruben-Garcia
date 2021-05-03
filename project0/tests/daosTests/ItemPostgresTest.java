@@ -13,7 +13,7 @@ public class ItemPostgresTest {
 	@Test
 	public void testAddItem() {
 		ItemPostgres ip = new ItemPostgres(); 
-		ip.add(t, d); 
+		int a = ip.add(t, d); 
 		assertEquals(1, a); 
 	}
 }

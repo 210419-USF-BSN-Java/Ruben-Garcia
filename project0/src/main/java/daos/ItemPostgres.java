@@ -15,26 +15,36 @@ import util.ConnectionUtil;
 
 public class ItemPostgres implements ItemsDao {
 	
-	@Override
-	public Item add(Item t) {
-		// TODO Auto-generated method stub
-		Item item = null; 
-		String sql = "insert into items (item_name, item_statusOwned, item_price) values (?, ?, ?) returning item_id)";
-		return null;
-		/*
-		try(Connection con = ConnectionUtil.getConnectionFromEnv()){
-			PreparedStatement ps = con.prepareStatement(sql); 
-			ps.setString(1, t.getItem_name());
-			ps.setBoolean(0, false);
+	public ItemPostgres() {
+		super(); 
+	}
+	
+	public int add(String n, Double p) { 
+		int status = 0;  
+		String sql = "insert into items (item_name, item_price) values (?, ?)";
+		try {
+			Connection c = ConnectionUtil.getHardCodedConnection(); 
+			PreparedStatement ps = c.prepareStatement(sql); 
+			ps.setString(1,n); 
+			ps.setDouble(2, p); 
+		    status = ps.executeUpdate(); 
+			if(status > 0) {
+				System.out.println("item was added successfully"); 
+			}else {
+				System.out.println("item was not added, please make sure you input the correct parameters"); 
+			}
+			
+		}catch(SQLException e) {
+			System.out.println("error happended");
+			e.printStackTrace();
+		}catch(Exception e) {
+			System.out.println(e); 
 		}
-		*/
+		return status;
+		
 	}
 
-	@Override
-	public Item getById(Integer id) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+
 
 	@Override
 	public List<Item> getAll() {
@@ -82,6 +92,22 @@ public class ItemPostgres implements ItemsDao {
 
 	@Override
 	public List<Item> getAllItemsOwned(String t) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+
+	@Override
+	public Item add(Item t) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+
+	@Override
+	public Item getById(Integer id) {
 		// TODO Auto-generated method stub
 		return null;
 	}

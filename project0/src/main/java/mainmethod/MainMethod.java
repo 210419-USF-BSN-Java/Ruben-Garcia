@@ -25,7 +25,15 @@ public class MainMethod {
     	//Boolean customerLogin = new ConsoleUI().customerLogin(); 
     	
     	//Boolean employeeLogin = new ConsoleUI().EmployeeLogin(); 
-    	Boolean managerLogin = new ConsoleUI().ManagerLogin(); 
+    	//Boolean managerLogin = new ConsoleUI().ManagerLogin();
+    	ConsoleUI test = new ConsoleUI(); 
+    	/*
+    	ItemPostgres ip = new ItemPostgres(); 
+    	ip.add("broom", 9.99); 
+    	*/ 
+    	
+    	test.addItem();
+ 
     	
     }
 }

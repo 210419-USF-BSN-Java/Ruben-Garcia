@@ -32,7 +32,8 @@ public class MainMethod {
     	ip.add("broom", 9.99); 
     	*/ 
     	
-    	test.createCustomerAccount();
+    	//test.createCustomerAccount();
+    	test.deleteItem(); 
  
     	
     }

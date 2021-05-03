@@ -166,5 +166,17 @@ public class ConsoleUI {
 	
 	}
 	
+	public int deleteItem() {
+		Scanner sc = new Scanner(System.in); 
+		System.out.println("hello, you are trying to remove an item. Please specify an id number of the item");
+		//System.out.println("press one of the options for how you would like to remove an item");
+		int id = sc.nextInt(); 
+		ItemPostgres ip = new ItemPostgres(); 
+		int a = ip.delete(id); 
+		sc.close();
+		return a; 
+	}
+	
+	
 	
 }

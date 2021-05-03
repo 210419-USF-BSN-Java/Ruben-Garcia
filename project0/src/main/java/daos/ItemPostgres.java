@@ -78,10 +78,31 @@ public class ItemPostgres implements ItemsDao {
 		return null;
 	}
 
-	@Override
-	public Integer delete(Item t) {
-		// TODO Auto-generated method stub
-		return null;
+	public Integer delete(int i) {
+		int status = 0;  
+		//int id = t.getId();
+		//String nameO = t.getItem_name(); 		
+		
+		String sqlID = "delete from items where item_id=?";
+		String sqlName = "delete from items where item_name=?";
+		try {
+			Connection c = ConnectionUtil.getHardCodedConnection(); 
+			PreparedStatement ps = c.prepareStatement(sqlID); 
+			ps.setInt(1, i); 
+		    status = ps.executeUpdate(); 
+			if(status > 0) {
+				System.out.println("item was deleted successfully"); 
+			}else {
+				System.out.println("item was not deleted, please make sure the id exisits"); 
+			}
+			
+		}catch(SQLException e) {
+			System.out.println("error happended");
+			e.printStackTrace();
+		}catch(Exception e) {
+			System.out.println(e); 
+		}
+		return status;
 	}
 
 	@Override
@@ -108,6 +129,12 @@ public class ItemPostgres implements ItemsDao {
 
 	@Override
 	public Item getById(Integer id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Integer delete(Item t) {
 		// TODO Auto-generated method stub
 		return null;
 	}

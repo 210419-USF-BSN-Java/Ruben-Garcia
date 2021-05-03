@@ -8,12 +8,18 @@
 		<maven.compiler.source>1.8</maven.compiler.source>
 		<maven.compiler.target>1.8</maven.compiler.target>
 	</properties>
-
+	<!-- https://mvnrepository.com/artifact/org.postgresql/postgresql -->
 	<dependencies>
 		<dependency>
 			<groupId>org.postgresql</groupId>
 			<artifactId>postgresql</artifactId>
 			<version>42.2.20</version>
 		</dependency>
-	</dependencies>
+			 <dependency>
+		      <groupId>junit</groupId>
+		      <artifactId>junit</artifactId>
+		      <version>4.13</version>
+		      <scope>test</scope>
+		    </dependency>
+		</dependencies>
 </project>

@@ -18,10 +18,31 @@ import models.Item;
 
 public class CustomerPostgres implements CustomerDao {
 
-	@Override
-	public Boolean add(Object t) {
-		// TODO Auto-generated method stub
-		return true; 
+	public int add(String u, String fn, String ln, String pw) {
+		
+		String sql = "insert into customer (customer_username, customer_firstname, customer_lastname, customer_password) values(?,?, ?,?)";
+		int status = 0;
+		try {
+			Connection c = ConnectionUtil.getHardCodedConnection(); 
+			PreparedStatement ps = c.prepareStatement(sql); 
+			ps.setString(1,u); 
+			ps.setString(2,fn);
+			ps.setString(3, ln);
+			ps.setString(4, pw);
+		    status = ps.executeUpdate(); 
+			if(status > 0) {
+				System.out.println("customer account was created successfully"); 
+			}else {
+				System.out.println("customer account was not added, please make sure you input the correct parameters"); 
+			}
+			
+		}catch(SQLException e) {
+			System.out.println("error happended");
+			e.printStackTrace();
+		}catch(Exception e) {
+			System.out.println(e); 
+		}
+		return status;
 	}
 
 	@Override
@@ -139,6 +160,12 @@ public class CustomerPostgres implements CustomerDao {
 			e.printStackTrace();
 		}
 		return customer; 
+	}
+
+	@Override
+	public Object add(Object t) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

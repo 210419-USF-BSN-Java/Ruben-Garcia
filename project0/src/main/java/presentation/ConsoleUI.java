@@ -1,6 +1,7 @@
 package presentation;
 import java.util.Scanner;
 
+import daos.CustomerPostgres;
 import daos.ItemPostgres;
 import models.Employee;
 import services.CustomerLogin;
@@ -136,15 +137,34 @@ public class ConsoleUI {
 		return accessGranted;
 	}
 	
-	public void addItem() {
+	public int addItem() {
 		Scanner sc = new Scanner(System.in); 
 		System.out.println("hello, you are trying to add an item. please input a name");
 		String n = sc.nextLine(); 
 		System.out.println("please input a price");
 		double p = sc.nextDouble(); 
 		ItemPostgres ip = new ItemPostgres(); 
-		ip.add(n, p); 
+		int a = ip.add(n, p); //returns a number based if user was successfully completed
 		sc.close();
+		return a; 
 	
 	}
+	public int createCustomerAccount() {
+		Scanner sc = new Scanner(System.in); 
+		System.out.println("hello, you are trying to create a customer account. please input a username");
+		String u = sc.nextLine(); 
+		System.out.println("please input a first name");
+		String fn = sc.nextLine(); 
+		System.out.println("please input a last name");
+		String ln = sc.nextLine(); 
+		System.out.println("please input a paswword");
+		String pw = sc.nextLine(); 
+		CustomerPostgres cp = new CustomerPostgres(); 
+		int a = cp.add(u, fn, ln, pw); 
+		sc.close();
+		return a; 
+	
+	}
+	
+	
 }

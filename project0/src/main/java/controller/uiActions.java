@@ -1,4 +1,4 @@
-package presentation;
+package controller;
 
 public interface uiActions {
 	public abstract void logIn(); 

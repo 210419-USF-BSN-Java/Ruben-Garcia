@@ -1,4 +1,4 @@
-package presentation;
+package controller;
 import java.util.Scanner;
 
 import daos.CustomerPostgres;

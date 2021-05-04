@@ -1,4 +1,4 @@
-package presentation;
+package controller;
 
 public interface genericUI {
 	public abstract void welcome();

@@ -1,4 +1,4 @@
-package presentation;
+package controller;
 
 public class customerView {
 	

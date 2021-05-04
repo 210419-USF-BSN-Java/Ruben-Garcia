@@ -153,10 +153,31 @@ public class ItemPostgres implements ItemsDao {
 		return itemsAvailable; 
 	}
 
-	@Override
-	public List<Item> getAllItemsOwned(String t) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Item> getAllItemsOwnedBySomeCustomer(Customer customer) {
+		//TODO test output
+		int i = customer.getId(); //get user id
+		List<Item> itemsOwnedByCustomer = new ArrayList<>(); 
+		String sql = "SELECT *\n" + 
+				"FROM public.items\n" + 
+				"inner join public.customer\n" + 
+				"on public.items.fk_customer_owner_id = public.customer.customer_id\n" + 
+				"where public.customer.customer_id = ?;\n";
+		try {
+			Connection c = ConnectionUtil.getHardCodedConnection();
+			PreparedStatement p = c.prepareStatement(sql); 
+			p.setInt(1, i);
+			ResultSet rs = p.executeQuery();
+			while(rs.next()) {
+				int id = rs.getInt("item_id"); 
+				String name = rs.getString("item_name"); 
+				Double price = rs.getDouble("item_price"); 
+				Boolean so = rs.getBoolean("status_Owned");  
+				itemsOwnedByCustomer.add(new Item(id, name, so, price));
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+		return itemsOwnedByCustomer; 
 	}
 
 
@@ -177,6 +198,12 @@ public class ItemPostgres implements ItemsDao {
 
 	@Override
 	public Integer delete(Item t) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Item> getAllItemsOwned(String t) {
 		// TODO Auto-generated method stub
 		return null;
 	}

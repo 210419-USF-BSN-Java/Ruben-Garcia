@@ -129,7 +129,9 @@ public class ItemPostgres implements ItemsDao {
 	@Override
 	public List<Item> getAllItemsAvailable() {
 		List<Item> itemsAvailable = new ArrayList<>(); 
-		String sql = "select * from items where \"status_Owned\" = null;\n";
+		String sql = "SELECT item_id, item_name, item_price, \"status_Owned\", fk_customer_owner_id\n" + 
+				"FROM public.items\n" + 
+				"WHERE items.\"status_Owned\" is null\n";
 		try {
 			Connection c = ConnectionUtil.getHardCodedConnection(); 
 			PreparedStatement s = c.prepareStatement(sql); 
@@ -140,6 +142,9 @@ public class ItemPostgres implements ItemsDao {
 					int id = rs.getInt("item_id"); 
 					String name = rs.getString("item_name"); 
 					Double p = rs.getDouble("item_price"); 
+					//my issue with setting null and result set is that null values are converted to false.
+					//this caused an issue with getting a false value instead of the not null value
+					//TODO
 					Boolean so = rs.getBoolean("status_Owned");  
 					itemsAvailable.add(new Item(id, name, so, p));
 				}

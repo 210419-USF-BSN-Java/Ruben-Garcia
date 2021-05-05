@@ -290,7 +290,7 @@ public class StoreApp {
 
 	private void customerViewRemainingPayments() {
 		// TODO Auto-generated method stub
-		System.out.println("method still needs to be implemented");
+		System.out.println("sorry, this feature still needs to be implemented");
 		customerDashboard(); 
 		
 	}
@@ -308,10 +308,38 @@ public class StoreApp {
 		
 	}
 
-	private void customerDoBid() {
-		// TODO Auto-generated method stub
-		CreateBidService b = new CreateBidService(); 
+	private void customerDoBidMenu() { 
+		System.out.println("Please input the item you would like to place a bid for"); 
+		System.out.println("Please refer to the list for avalaible items in the customer dashboard options"); 
+		System.out.println("Press 0 if you would like to go back to the customer dashboard");
+		System.out.println("Press 1 if you would like to proceed");
+		int input = Integer.parseInt(sc.nextLine()); 
+		System.out.println("Are you sure you want to proceed with the input " + input);
+		System.out.println("Press Y for yes");
+		System.out.println("Press N for no"); 
+		String confirmInput = sc.nextLine();
+		if(confirmInput.equalsIgnoreCase("y")) {
+			callDecisionCustomerDashboard(input); 
+		}else if(confirmInput.equalsIgnoreCase("n")) {
+			customerInputBid(); 
+		}else {
+			customerDashboard(); 
+		}
 		
+		
+	}
+	
+	public void customerInputBid(){
+		int customerID = customer.getId(); 
+		System.out.println("Please input a bid amount including decimals");
+		Double bidAmount = sc.nextDouble(); 
+		System.out.println("You will need the id of the item you want to place a bid for"); 
+		System.out.println("Here's a list for your reference"); 
+		customerViewAvailaibleItems(); 
+		System.out.println("Please input the desired id number for the item you would like to bid for");
+		int itemid = Integer.parseInt(sc.nextLine()); 
+		int bp = new BidsPostgres().addBid(bidAmount, customerID, itemid);
+		customerDashboard(); 
 	}
 
 	private void customerViewAvailaibleItems() {

@@ -9,5 +9,7 @@ public class CreateBidService {
 		super(); 
 	}
 	
-	
+	public customerCreateBid(Customer customer, Item item) {
+		
+	}
 }

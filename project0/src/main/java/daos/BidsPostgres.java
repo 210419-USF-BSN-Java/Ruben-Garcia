@@ -14,6 +14,10 @@ import models.Customer;
 import util.ConnectionUtil;
 
 public class BidsPostgres implements BidsDao {
+	
+	public BidsPostgres(){
+		super(); 
+	}
 
 	public Object addBid(Double t, int a, int b) {
 		int status = 0;  
@@ -54,16 +58,17 @@ public class BidsPostgres implements BidsDao {
 		return null;
 	}
 
-	public Integer updateBid(int i) {
+	public Integer updateBid(int i, boolean b) {
 		//i is the bid id
 		String sql = "UPDATE public.bids\n" + 
-				"SET bid_accepted=true\n" + 
+				"SET bid_accepted=?\n" + 
 				"WHERE public.bids.bids_id =?;\n";
 		int status = 0;  
 		try {
 			Connection c = ConnectionUtil.getHardCodedConnection(); 
 			PreparedStatement ps = c.prepareStatement(sql);  
 			ps.setInt(1, i);
+			ps.setBoolean(2, b);
 		    status = ps.executeUpdate(); 
 			if(status > 0) {
 				System.out.println("bid was updated successfully"); 
@@ -111,7 +116,7 @@ public class BidsPostgres implements BidsDao {
 			if(status > 0) {
 				System.out.println("all other bids for the item has been rejected "); 
 			}else {
-				System.out.println("error"); 
+				System.out.println("all other bids weren't able to be rejected"); 
 			}
 			
 		}catch(SQLException e) {

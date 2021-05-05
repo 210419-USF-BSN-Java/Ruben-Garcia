@@ -64,6 +64,10 @@ CREATE TABLE public.items (
 	CONSTRAINT items_pkey PRIMARY KEY (item_id)
 );
 
+ALTER TABLE public.items ALTER COLUMN "status_Owned" DROP NOT NULL;
+ALTER TABLE public.items ALTER COLUMN "status_Owned" SET DEFAULT Null;
+
+
 
 -- public.items foreign keys
 

@@ -1,16 +1,9 @@
 package daos;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet; 
 import java.sql.SQLException; 
-import java.sql.Statement;
-import java.util.List; 
-
-import models.Customer;
 import util.ConnectionUtil;
 
 public class BidsPostgres implements BidsDao {
@@ -19,7 +12,7 @@ public class BidsPostgres implements BidsDao {
 		super(); 
 	}
 
-	public Object addBid(Double t, int a, int b) {
+	public int addBid(Double t, int a, int b) {
 		int status = 0;  
 		String sql = "INSERT INTO public.bids\n" + 
 				"(bid_amount, fk_customer_id, fk_item_id)\n" + 

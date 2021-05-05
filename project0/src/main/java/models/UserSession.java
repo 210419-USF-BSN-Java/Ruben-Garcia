@@ -6,6 +6,7 @@ public class UserSession implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private Boolean userLoggedIn; 
 	private String role; 
+	private int userID; 
 	
 	public UserSession() {
 		super(); 
@@ -66,6 +67,14 @@ public class UserSession implements Serializable {
 	@Override
 	public String toString() {
 		return "UserSession [userLoggedIn=" + userLoggedIn + ", role=" + role + "]";
+	}
+
+	public int getUserID() {
+		return userID;
+	}
+
+	public void setUserID(int userID) {
+		this.userID = userID;
 	}
 	
 	

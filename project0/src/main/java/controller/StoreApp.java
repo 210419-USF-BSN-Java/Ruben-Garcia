@@ -1,14 +1,22 @@
 package controller;
 
-import services.*; 
+import services.*;
+
+import java.util.List;
 import java.util.Scanner;
-import daos.*; 
+import daos.*;
+import models.Customer;
+import models.Employee;
+import models.Item;
+import models.UserSession; 
 
 
 
 public class StoreApp {
 	Services services = new Services(); 
 	Scanner sc = new Scanner(System.in); 
+	Employee employee = new Employee(); 
+	Customer customer; 
 	
 	public StoreApp() {
 		super(); 
@@ -110,6 +118,7 @@ public class StoreApp {
 		Boolean status = cls.userAuth(un, pw);
 		if(status) {
 			System.out.println("login successful");
+			customer = new CustomerPostgres().getCustomerByUserName(un); 
 			customerDashboard(); 
 		}else if(status != false) {
 			System.out.println("Login was not successful. Please try again or go back to the main menu"); 
@@ -271,21 +280,31 @@ public class StoreApp {
 
 	private void customerViewRemainingPayments() {
 		// TODO Auto-generated method stub
+		System.out.println("method still needs to be implemented");
 		
 	}
 
 	private void customerViewYourItems() {
-		// TODO Auto-generated method stub
+		List<Item> list = new ItemPostgres().getAllItemsOwnedBySomeCustomer(customer);
+			//for loops don't execute if the list is empty
+			for(Item item: list) {
+				System.out.println(item);
+			}
 		
 	}
 
 	private void customerDoBid() {
 		// TODO Auto-generated method stub
+		CreateBidService b = new CreateBidService(); 
 		
 	}
 
 	private void customerViewAvailaibleItems() {
-		// TODO Auto-generated method stub
 		
+		List<Item> list = new ItemPostgres().getAllItemsAvailable(); 	
+		for (Item element : list) {
+		    System.out.println(element);
+		}
+		customerDashboard(); 
 	}
 }

@@ -134,13 +134,17 @@ public class ItemPostgres implements ItemsDao {
 			Connection c = ConnectionUtil.getHardCodedConnection(); 
 			PreparedStatement s = c.prepareStatement(sql); 
 			ResultSet rs = s.executeQuery(); 
-			System.out.println("try executed");
-			while(rs.next()) {
-				int id = rs.getInt("item_id"); 
-				String name = rs.getString("item_name"); 
-				Double p = rs.getDouble("item_price"); 
-				Boolean so = rs.getBoolean("status_Owned");  
-				itemsAvailable.add(new Item(id, name, so, p));
+			if(rs.next()) {
+				System.out.println("Printing available items...");
+				while(rs.next()) {
+					int id = rs.getInt("item_id"); 
+					String name = rs.getString("item_name"); 
+					Double p = rs.getDouble("item_price"); 
+					Boolean so = rs.getBoolean("status_Owned");  
+					itemsAvailable.add(new Item(id, name, so, p));
+				}
+			}else {
+				System.out.println("no items available");
 			}
 			
 		}catch(SQLException e) {
@@ -156,6 +160,7 @@ public class ItemPostgres implements ItemsDao {
 	public List<Item> getAllItemsOwnedBySomeCustomer(Customer customer) {
 		//TODO test output
 		int i = customer.getId(); //get user id
+		String un = customer.getUserName(); 
 		List<Item> itemsOwnedByCustomer = new ArrayList<>(); 
 		String sql = "SELECT *\n" + 
 				"FROM public.items\n" + 
@@ -167,13 +172,19 @@ public class ItemPostgres implements ItemsDao {
 			PreparedStatement p = c.prepareStatement(sql); 
 			p.setInt(1, i);
 			ResultSet rs = p.executeQuery();
-			while(rs.next()) {
-				int id = rs.getInt("item_id"); 
-				String name = rs.getString("item_name"); 
-				Double price = rs.getDouble("item_price"); 
-				Boolean so = rs.getBoolean("status_Owned");  
-				itemsOwnedByCustomer.add(new Item(id, name, so, price));
+			if(rs.next()) {
+				System.out.println("printing results ...");
+				while(rs.next()) {
+					int id = rs.getInt("item_id"); 
+					String name = rs.getString("item_name"); 
+					Double price = rs.getDouble("item_price"); 
+					Boolean so = rs.getBoolean("status_Owned");  
+					itemsOwnedByCustomer.add(new Item(id, name, so, price));
+				}
+			}else {
+				System.out.println("no items owned by " +un);
 			}
+			
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}

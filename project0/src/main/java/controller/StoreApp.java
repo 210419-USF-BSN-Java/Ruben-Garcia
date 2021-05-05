@@ -256,11 +256,36 @@ public class StoreApp {
 	
 	public void callDecisionCustomerDashboard(int i) {
 		if(i == 1) {
-			customerLogin();
+			customerViewAvailaibleItems();
 		}else if(i ==2) {
-			employeeLogin(); 
+			customerDoBid();  
 		}else if(i == 3) {
-			managerLogin(); 
+			customerViewYourItems();  
+		}else if(i == 4) {
+			customerViewRemainingPayments(); 
+		}else {
+			System.out.println("please make sure to input only numbers 1-4");
+			customerDashboard(); 
 		}
+	}
+
+	private void customerViewRemainingPayments() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private void customerViewYourItems() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private void customerDoBid() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private void customerViewAvailaibleItems() {
+		// TODO Auto-generated method stub
+		
 	}
 }

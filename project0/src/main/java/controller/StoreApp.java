@@ -260,6 +260,16 @@ public class StoreApp {
 		System.out.println("Press 2 to make a bid on an availaible item");
 		System.out.println("Press 3 to view all items that you own");
 		System.out.println("Press 4 to view your remaining payments for your items");
+		int input = Integer.parseInt(sc.nextLine()); 
+		System.out.println("Are you sure you want to proceed with the input " + input);
+		System.out.println("Press Y for yes");
+		System.out.println("Press N for no"); 
+		String confirmInput = sc.nextLine();
+		if(confirmInput.equalsIgnoreCase("y")) {
+			callDecisionCustomerDashboard(input); 
+		}else if(confirmInput.equalsIgnoreCase("n")) {
+			customerDashboard(); 
+		}
 		
 	}
 	
@@ -281,6 +291,7 @@ public class StoreApp {
 	private void customerViewRemainingPayments() {
 		// TODO Auto-generated method stub
 		System.out.println("method still needs to be implemented");
+		customerDashboard(); 
 		
 	}
 
@@ -290,6 +301,10 @@ public class StoreApp {
 			for(Item item: list) {
 				System.out.println(item);
 			}
+			if(list.isEmpty()) {
+				System.out.println("You do not own any items. Try to place a bid on available items");
+			}
+			customerDashboard(); 
 		
 	}
 

@@ -277,7 +277,7 @@ public class StoreApp {
 		if(i == 1) {
 			customerViewAvailaibleItems();
 		}else if(i ==2) {
-			customerDoBid();  
+			customerDoBidMenu();  
 		}else if(i == 3) {
 			customerViewYourItems();  
 		}else if(i == 4) {
@@ -319,14 +319,26 @@ public class StoreApp {
 		System.out.println("Press N for no"); 
 		String confirmInput = sc.nextLine();
 		if(confirmInput.equalsIgnoreCase("y")) {
-			callDecisionCustomerDashboard(input); 
+			callDecisionCustomerBid(input); 
 		}else if(confirmInput.equalsIgnoreCase("n")) {
-			customerInputBid(); 
+			customerDoBidMenu(); 
 		}else {
-			customerDashboard(); 
+			customerDoBidMenu(); 
 		}
 		
 		
+	}
+	
+	public void callDecisionCustomerBid(int i) {
+		if(i == 0) {
+			customerDoBidMenu(); 
+		}
+	    else if(i == 1) {
+			customerViewAvailaibleItems();
+		}else {
+			System.out.println("please make sure to input only numbers 0 or 1");
+			customerDoBidMenu(); 
+		}
 	}
 	
 	public void customerInputBid(){

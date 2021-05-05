@@ -129,7 +129,7 @@ public class ItemPostgres implements ItemsDao {
 	@Override
 	public List<Item> getAllItemsAvailable() {
 		List<Item> itemsAvailable = new ArrayList<>(); 
-		String sql = "select * from items where \"status_Owned\" = false;\n";
+		String sql = "select * from items where \"status_Owned\" = null;\n";
 		try {
 			Connection c = ConnectionUtil.getHardCodedConnection(); 
 			PreparedStatement s = c.prepareStatement(sql); 

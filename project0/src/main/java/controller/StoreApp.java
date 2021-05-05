@@ -229,7 +229,6 @@ public class StoreApp {
 		
 		System.out.println("Please decide whether to reject or accept an active bid's offer");
 		System.out.println("To help you out, we will print the list of items that are pending/n/n");
-		ViewAvailaibleItemsBid(); 
 		System.out.println("Please input the id number of the item");
 		int id = Integer.parseInt(sc.nextLine());
 		System.out.println("Please input either true or false; true if you want to accept the bid or false if you want to reject it"); 
@@ -364,7 +363,7 @@ public class StoreApp {
 
 	private void customerViewAvailaibleItems() {
 		
-		List<Item> list = new ItemPostgres().getAllItemsAvailable(); 	
+		List<Item> list = new ItemPostgres().getAll(); 	
 		for (Item element : list) {
 		    System.out.println(element);
 		}
@@ -372,7 +371,7 @@ public class StoreApp {
 	}
 	
 private void ViewAvailaibleItemsBid() {
-		
+		//this prints out items where owned status is false , not null
 		List<Item> list = new ItemPostgres().getAllItemsAvailable(); 	
 		for (Item element : list) {
 		    System.out.println(element);

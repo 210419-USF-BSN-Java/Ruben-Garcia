@@ -2,8 +2,7 @@ package controller;
 
 import services.*; 
 import java.util.Scanner;
-
-import daos.CustomerPostgres;
+import daos.*; 
 
 
 
@@ -166,21 +165,84 @@ public class StoreApp {
 	}
 	
 	public void employeeDashboard() {
-		System.out.println("Welcome, you are logged in as an employee.");
+		System.out.println("You are logged in as an employee.");
 		System.out.println("Below are your options as an employee.");
 		System.out.println("Please input a number according to your needs.");
-	}
-	
-	public void callDecisionEmployeeDashboard(int i) {
-		if(i == 1) {
-			customerLogin();
-		}else if(i ==2) {
-			employeeLogin(); 
-		}else if(i == 3) {
-			managerLogin(); 
+		System.out.println("Press 1 to add a new item to the store"); 
+		System.out.println("Press 2 to remove a item from the database");
+		System.out.println("Press 3 to view all pending offer and or Reject/Accept a offer"); 
+		System.out.println("Press 4 to view all past payments"); 
+		int input = Integer.parseInt(sc.nextLine()); 
+		System.out.println("Are you sure you want to proceed with the input " + input);
+		System.out.println("Press Y for yes");
+		System.out.println("Press N for no"); 
+		String confirmInput = sc.nextLine();
+		if(confirmInput.equalsIgnoreCase("y")) {
+			callDecisionEmployeeDashboard(input); 
+		}else if(confirmInput.equalsIgnoreCase("n")) {
+			employeeDashboard(); 
 		}
 	}
 	
+	
+	
+	public void callDecisionEmployeeDashboard(int i) {
+		if(i == 1) {
+			employeeAddItem();
+		}else if(i ==3) {
+			employeeAcceptRejectBid(); 
+		}else if(i == 2) {
+			employeeDeleteItem(); 
+		}else if(i == 4) {
+			employeeViewAllPayments();
+		}
+	}
+	
+
+	private void employeeViewAllPayments() {
+		// TODO Auto-generated method stub
+		System.out.println("payments feature coming soon");
+		
+	}
+
+	private void employeeDeleteItem() {
+		System.out.println("Here are all the items in the store");
+		System.out.println("Please input which item to delete from the store by referencing its id");
+		System.out.println("Please only insert one id at a time"); 
+		int id = Integer.parseInt(sc.nextLine()); 
+		int status = new ItemPostgres().delete(id); 
+		employeeDashboard(); 
+		
+	}
+
+	private void employeeAcceptRejectBid() {
+		//implement method to view all bids along with their bid id
+		
+		System.out.println("Please decide whether to reject or accept an active bid's offer");
+		System.out.println("Please input the id number of the item");
+		int id = Integer.parseInt(sc.nextLine());
+		System.out.println("Please input either true or false; true if you want to accept the bid or false if you want to reject it"); 
+		Boolean b = sc.nextBoolean();
+		int status = new BidsPostgres().updateBid(id, b); 
+		
+		if(status > 1 && (b.compareTo(true) == 0)) {
+			int updatedOtherBids = new BidsPostgres().updateAllOtherBids(id); 
+		}
+		System.out.println("you are returning to the employee dashboard");
+		employeeDashboard(); 
+		
+	}
+
+	private void employeeAddItem() {
+		System.out.println("Please input an item name");
+		String nm = sc.nextLine();
+		System.out.println("Please input an initial price");
+		Double p = sc.nextDouble(); 
+		int ip = new ItemPostgres().add(nm, p);
+		employeeDashboard(); 
+		
+	}
+
 	public void customerDashboard() {
 		System.out.println("Welcome, you are logged in as a customer.");
 		System.out.println("Below are your options as a customer.");

@@ -228,11 +228,19 @@ public class StoreApp {
 		//implement method to view all bids along with their bid id
 		
 		System.out.println("Please decide whether to reject or accept an active bid's offer");
+		System.out.println("To help you out, we will print the list of items that are pending/n/n");
+		ViewAvailaibleItemsBid(); 
 		System.out.println("Please input the id number of the item");
 		int id = Integer.parseInt(sc.nextLine());
 		System.out.println("Please input either true or false; true if you want to accept the bid or false if you want to reject it"); 
 		Boolean b = sc.nextBoolean();
-		int status = new BidsPostgres().updateBid(id, b); 
+		Boolean bn; 
+		if(b == true) {
+			bn = true; 
+		}else {
+			bn = false; 
+		}
+		int status = new BidsPostgres().updateBid(id, bn); 
 		
 		if(status > 1 && (b.compareTo(true) == 0)) {
 			int updatedOtherBids = new BidsPostgres().updateAllOtherBids(id); 
@@ -248,7 +256,6 @@ public class StoreApp {
 		System.out.println("Please input an initial price");
 		Double p = sc.nextDouble(); 
 		int ip = new ItemPostgres().add(nm, p);
-		employeeDashboard(); 
 		
 	}
 
@@ -334,7 +341,7 @@ public class StoreApp {
 			customerDoBidMenu(); 
 		}
 	    else if(i == 1) {
-			customerViewAvailaibleItems();
+			customerInputBid(); 
 		}else {
 			System.out.println("please make sure to input only numbers 0 or 1");
 			customerDoBidMenu(); 
@@ -343,15 +350,16 @@ public class StoreApp {
 	
 	public void customerInputBid(){
 		int customerID = customer.getId(); 
-		System.out.println("Please input a bid amount including decimals");
-		Double bidAmount = sc.nextDouble(); 
-		System.out.println("You will need the id of the item you want to place a bid for"); 
 		System.out.println("Here's a list for your reference"); 
-		customerViewAvailaibleItems(); 
+		System.out.println("Only add items that bid_accepted is null"); 
+		System.out.println("You will need the id of the item you want to place a bid for");
+		ViewAvailaibleItemsBid(); 
 		System.out.println("Please input the desired id number for the item you would like to bid for");
 		int itemid = Integer.parseInt(sc.nextLine()); 
+		System.out.println("Please input a bid amount including decimals");
+		Double bidAmount = sc.nextDouble(); 
+		
 		int bp = new BidsPostgres().addBid(bidAmount, customerID, itemid);
-		customerDashboard(); 
 	}
 
 	private void customerViewAvailaibleItems() {
@@ -361,5 +369,13 @@ public class StoreApp {
 		    System.out.println(element);
 		}
 		customerDashboard(); 
+	}
+	
+private void ViewAvailaibleItemsBid() {
+		
+		List<Item> list = new ItemPostgres().getAllItemsAvailable(); 	
+		for (Item element : list) {
+		    System.out.println(element);
+		} 
 	}
 }

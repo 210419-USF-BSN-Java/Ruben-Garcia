@@ -363,7 +363,7 @@ public class StoreApp {
 
 	private void customerViewAvailaibleItems() {
 		
-		List<Item> list = new ItemPostgres().getAll(); 	
+		List<Item> list = new ItemPostgres().getAllItemsAvailable(); 	
 		for (Item element : list) {
 		    System.out.println(element);
 		}
@@ -371,7 +371,8 @@ public class StoreApp {
 	}
 	
 private void ViewAvailaibleItemsBid() {
-		//this prints out items where owned status is false , not null
+		//this prints out items where owned status is false , we need null
+		//must implement a query where it makes a where statement where the column owned_status is Null
 		List<Item> list = new ItemPostgres().getAllItemsAvailable(); 	
 		for (Item element : list) {
 		    System.out.println(element);

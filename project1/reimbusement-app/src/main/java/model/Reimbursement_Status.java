@@ -13,6 +13,12 @@ public class Reimbursement_Status implements Serializable {
 	public Reimbursement_Status(){
 		super();
 	}
+	
+	public Reimbursement_Status(int id, String status){
+		super();
+		this.reimb_status_Id = id; 
+		this.reimb_status = status; 
+	}
 
 	public int getReimb_status_Id() {
 		return reimb_status_Id;

@@ -1,12 +1,25 @@
 package model;
 
-public class Reimbusement_Type {
+import java.io.Serializable;
+
+public class Reimbusement_Type implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private int reimb_type_id; 
 	private String reimb_type;
 	
 	public Reimbusement_Type() {
 		super();
 	}
+	
+	public Reimbusement_Type(int reimb_type_id, String reimb_type) {
+		super();
+		this.reimb_type_id = reimb_type_id; 
+		this.reimb_type = reimb_type; 
+		
+	}  
 	
 	public int getReimb_type_id() {
 		return reimb_type_id;

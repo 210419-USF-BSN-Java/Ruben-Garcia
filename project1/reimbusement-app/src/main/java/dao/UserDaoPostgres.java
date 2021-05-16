@@ -44,11 +44,35 @@ public class UserDaoPostgres implements UserDao {
 		
 		return user; 
 	}
-
+	//works
 	@Override
 	public User getById(Integer id) {
-		// TODO Auto-generated method stub
-		return null;
+		String sql = "select * from public.ers_users where ers_user_id = ?;\n";
+		User user = null; 
+		try {
+			Connection c = ConnectionUtil.getConnection(); 
+			PreparedStatement ps = c.prepareStatement(sql);
+			System.out.println("try donr");
+			ps.setInt(1, id);
+			
+			ResultSet rs = ps.executeQuery(); 
+			if(rs.next()) {
+				user = new User();
+				user.setId(id);
+				user.setUsername(rs.getString("ers_username"));
+				user.setPassword(rs.getString("ers_password"));
+				user.setFirstName(rs.getString("user_first_name"));
+				user.setLastName(rs.getString("user_last_name"));
+				user.setEmail(rs.getString("user_email"));
+				user.setUserRoleId(rs.getInt("user_role_id"));
+				
+			}
+			
+		}catch(SQLException e){
+			e.printStackTrace();
+		}
+		System.out.println(user);
+		return user;
 	}
 
 	@Override
@@ -77,17 +101,41 @@ public class UserDaoPostgres implements UserDao {
 		
 		return users;
 	}
-
+	//TODO 
 	@Override
 	public Integer update(User t) {
-		// TODO Auto-generated method stub
-		return null;
+		String sql = "update public.ers_users set ers_username = ? , public.ers_password = ? , public.user_first_name = ? , public.user_last_name = ?, public.user_email = ?, role_id = ? where ers_user_id = ? ;\n";
+		int r = -1;
+		try {
+			Connection c = ConnectionUtil.getConnection(); 
+			PreparedStatement ps = c.prepareStatement(sql); 
+			ps.setString(1, t.getUsername());
+			ps.setString(2, t.getPassword());
+			ps.setString(3, t.getFirstName());
+			ps.setString(4, t.getLastName());
+			ps.setString(5, t.getEmail());
+			ps.setInt(6, t.getUserRoleId());
+			r = ps.executeUpdate();
+			
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+		return r;
 	}
-
+	//TODO , test
 	@Override
 	public Integer delete(User t) {
-		// TODO Auto-generated method stub
-		return null;
+		int r = -1; 
+		String sql = "delete from public.ers_users where ers_user_id = ?;\n";
+		try {
+			Connection c = ConnectionUtil.getConnection();
+			PreparedStatement ps = c.prepareStatement(sql);
+			ps.setInt(1, t.getId());
+			r = ps.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+		return r;
 	}
 
 }

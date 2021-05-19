@@ -137,5 +137,22 @@ public class UserDaoPostgres implements UserDao {
 		}
 		return r;
 	}
+	
+	@Override
+	public boolean validate(String username, String password) {
+		String sql = "select * from public.ers_users where ers_username = ? and ers_password = ?;\n";
+		boolean status = false; 
+		try {
+			Connection c = ConnectionUtil.getConnection();
+			PreparedStatement ps = c.prepareStatement(sql); 
+			ps.setString(1, username);
+			ps.setString(2, password);
+			ResultSet rs = ps.executeQuery();
+			status = rs.next();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+		return status;
+	}
 
 }

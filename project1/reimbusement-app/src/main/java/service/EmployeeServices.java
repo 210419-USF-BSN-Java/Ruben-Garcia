@@ -7,7 +7,7 @@ import dao.ReimbDao;
 import dao.UserDao;
 import model.Reimbursement;
 
-public class EmployeeServices implements EmployeeServicesImp  {
+public class EmployeeServices implements EmployeeServicesInterface  {
 	private UserDao ud; 
 	private ReimbDao rd; 
 	
@@ -17,12 +17,6 @@ public class EmployeeServices implements EmployeeServicesImp  {
 	
 	public void ReimbServiceImplementation() {
 		rd = DAOFactory.getDAOFactory().getReimbDao();
-	}
-
-	@Override
-	public void checkCredentials() {
-		// TODO Auto-generated method stub
-		
 	}
 
 	@Override

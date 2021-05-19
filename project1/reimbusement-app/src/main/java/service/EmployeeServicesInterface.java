@@ -6,9 +6,8 @@ import java.util.List;
 
 import model.Reimbursement;
 
-public interface EmployeeServicesImp {
-	
-	public void checkCredentials();  
+public interface EmployeeServicesInterface {
+	 
 	public void submitReimbursementRequest();
 	public void submitImageToReimbRequest();
 	public List<Reimbursement> viewPendingRequests();

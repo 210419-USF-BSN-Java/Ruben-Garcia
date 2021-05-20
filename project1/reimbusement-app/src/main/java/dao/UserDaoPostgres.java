@@ -141,7 +141,7 @@ public class UserDaoPostgres implements UserDao {
 	@Override
 	public boolean validate(String username, String password) {
 		String sql = "select * from public.ers_users where ers_username = ? and ers_password = ?;\n";
-		boolean status = false; 
+		boolean status = false;
 		try {
 			Connection c = ConnectionUtil.getConnection();
 			PreparedStatement ps = c.prepareStatement(sql); 
@@ -153,6 +153,23 @@ public class UserDaoPostgres implements UserDao {
 			e.printStackTrace();
 		}
 		return status;
+	}
+	
+	public int getRoleIdOfUser(String username) {
+		String sql = "select public.ers_users.user_role_id from public.ers_users where ers_username=?\n";
+		int role_id = 0; 
+		try {
+			Connection c = ConnectionUtil.getConnection();
+			PreparedStatement ps = c.prepareStatement(sql); 
+			ps.setString(1, username);
+			ResultSet rs = ps.executeQuery();
+			while(rs.next()) {
+				role_id = rs.getInt(1);
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+		return role_id;
 	}
 
 }

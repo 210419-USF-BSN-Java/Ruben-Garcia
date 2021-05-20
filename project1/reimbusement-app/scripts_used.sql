@@ -96,12 +96,15 @@ values(200.23,'relocation to another state farther than 50 miles', 3,2,1,1);
 insert into public.ers_reimbursement (reimb_amount, reimb_description, reimb_author, reimb_resolver, reimb_status_id,reimb_type_id )
 values(3234.99,'food, living costs', 3,2,2,2);
 
+select * from public.ers_users where ers_username ='tester'and ers_password = 'password'
 
+select * from public.ers_users where ers_username = ? and ers_password = ? returning user_role_id ; 
 
+select * from public.ers_users where ers_username = 'tester' and ers_password = 'password ' 
 
+select public.ers_users.user_role_id from public.ers_users where ers_username='tester' 
 
-
-
+select public.ers_users.user_role_id from public.ers_users where ers_username=?
 
 
 

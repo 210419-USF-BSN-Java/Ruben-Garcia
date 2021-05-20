@@ -9,12 +9,14 @@ public class tester {
 		User tester = new User( 10,"tester12", "password", "jake", "parker", "spoof1@gmail.com", 1);
 		
 		// TODO Auto-generated method stubcon.setAutoCommit(false);
-		//UserDaoPostgres u = new UserDaoPostgres(); 
+		UserDaoPostgres u = new UserDaoPostgres(); 
 		//u.getAll(); 
 		//u.add(tester);
 		//u.getById(2);
-		ReimbDaoPostgres r = new ReimbDaoPostgres(); 
-		r.getAll(); 
+		Boolean s = u.validate("tester", "password");
+		System.out.println(s);
+		int r = u.getRoleIdOfUser("benEmployee"); 
+		System.out.println(r);
 		}
 	
 

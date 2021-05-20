@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>employee dashboard</title>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    <link href="../css/main.css " rel="stylesheet">
+    
+
+</head>
+<body>
+    <div class="layout">
+         <div class="reimb-form"> 
+        <div class="login-form" style="margin-top: 0%">
+              <form action="/reimbursement_submit" name="reimbursement_submission">
+            <div class="form-group">
+                <label>Amount</label>
+                <input id="reimbursement-amount" type="number" class="form-control" placeholder="Amount">
+            </div>
+            <div class="form-group">
+                <label for="Reimbursement-type-list">Reimbursement Type:</label>
+                <select name="Reimbursement-type-list" id="Reimbursement-type">
+                    <option value="Lodging">Lodging</option>
+                    <option value="Travel">Travel</option>
+                    <option value="Food">Food </option>
+                    <option value="Other">Other</option>
+                </select>
+            <br>
+            </div>
+            <div class="form-group">
+                <label for="receipt">Upload a receipt photo (optional)</label>
+                <input type="file" id="receipt" accept="image/png,image/jpeg">
+            </div>
+              <div class="form-group">
+                <label>Reimbursement Description</label>
+                <textarea placeholder="Please write your description here"  cols="100%"> </textarea>
+            </div>
+            <button type="submit" class="btn btn-black">Submit</button>
+        </div>
+    </div>
+
+    </div>
+   
+</body>
+</html>

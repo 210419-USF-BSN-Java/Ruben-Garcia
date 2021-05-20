@@ -18,12 +18,12 @@ public class FrontController extends DefaultServlet {
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 		String path = request.getRequestURI().substring(request.getContextPath().length());
-		
-		if(path.startsWith("/static") || path.equals("/") || path.equals("/index.html")) {
-			doGet(request, response);
+		if(path.startsWith("/static/") || path.equals("/") || path.equals("/index.html")) {
+			doGet(request, response); 
 		}else {
-			rh.processRequest(request, response); 
+			rh.processRequest(request, response);
 		}
+		
 	}
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException{

@@ -15,3 +15,17 @@ getUserInfoButton.addEventListener('click', function(event){
     }
     getInfo();
 })
+
+const logoutButton = document.getElementById("logout");
+logoutButton.addEventListener("click", function(event){
+    console.log("logout button was clicked")
+      function invalidate(){
+        fetch("http://localhost:8080/reimbursement-app/logout",{
+             method: "POST"
+
+         }); 
+       console.log("the invalidate servlet was called to invalidat1e session, you should be redirected to home page")
+       location.href='http://localhost:8080/reimbursement-app/'
+    }
+    invalidate(); 
+})

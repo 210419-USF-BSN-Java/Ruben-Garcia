@@ -108,7 +108,7 @@ select public.ers_users.user_role_id from public.ers_users where ers_username=?
 
 
 
-
+select * from public.ers_users where ers_username = 'tester';
 
 
 

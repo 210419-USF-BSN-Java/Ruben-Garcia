@@ -171,5 +171,33 @@ public class UserDaoPostgres implements UserDao {
 		}
 		return role_id;
 	}
+	
+	public User getByUsername(String username) {
+		String sql = "select * from public.ers_users where ers_username = ?";
+		User user = null; 
+		try {
+			Connection c = ConnectionUtil.getConnection(); 
+			PreparedStatement ps = c.prepareStatement(sql);
+			ps.setString(1, username);
+			
+			ResultSet rs = ps.executeQuery(); 
+			if(rs.next()) {
+				user = new User();
+				user.setId(rs.getInt("ers_user_id"));
+				user.setUsername(rs.getString("ers_username"));
+				user.setPassword(rs.getString("ers_password"));
+				user.setFirstName(rs.getString("user_first_name"));
+				user.setLastName(rs.getString("user_last_name"));
+				user.setEmail(rs.getString("user_email"));
+				user.setUserRoleId(rs.getInt("user_role_id"));
+				
+			}
+			
+		}catch(SQLException e){
+			e.printStackTrace();
+		}
+		System.out.println(user);
+		return user;
+	}
 
 }

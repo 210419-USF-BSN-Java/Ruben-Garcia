@@ -8,15 +8,20 @@
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
     <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-    <link href="../css/main.css " rel="stylesheet">
+    <link href="main.css " rel="stylesheet">
+    <script src="employee_view.js" defer></script>
     
 
 </head>
 <body>
+     <p class="result" style="color:green"></p>
     <div class="layout">
-         <div class="reimb-form"> 
+        <div class="employee-things">
+            <button id="get-user-info">Get User Info</button>
+        </div>
+        <div class="reimb-form"> 
         <div class="login-form" style="margin-top: 0%">
-              <form action="/reimbursement_submit" name="reimbursement_submission">
+              <form  name="reimbursement_submission"  id="reimb_submit">
             <div class="form-group">
                 <label>Amount</label>
                 <input id="reimbursement-amount" type="number" class="form-control" placeholder="Amount">
@@ -37,9 +42,9 @@
             </div>
               <div class="form-group">
                 <label>Reimbursement Description</label>
-                <textarea placeholder="Please write your description here"  cols="100%"> </textarea>
+                <textarea id="reimb_desc" placeholder="Please write your description here"  cols="100%"> </textarea>
             </div>
-            <button type="submit" class="btn btn-black">Submit</button>
+            <button id="employee_reimb_submit" type="button" class="btn btn-black">Submit</button>
         </div>
     </div>
 

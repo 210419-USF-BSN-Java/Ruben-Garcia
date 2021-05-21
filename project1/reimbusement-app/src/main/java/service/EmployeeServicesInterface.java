@@ -8,11 +8,11 @@ import model.Reimbursement;
 
 public interface EmployeeServicesInterface {
 	 
-	public void submitReimbursementRequest();
+	public Reimbursement submitReimbursementRequest(Reimbursement t);
 	public void submitImageToReimbRequest();
 	public List<Reimbursement> viewPendingRequests();
 	public List<Reimbursement> viewResolvedRequests(); 
-	public void viewEmployeeInfo(); 
+	public User viewEmployeeInfo(String username); 
 	public void updateInfo(); 
 	
 	

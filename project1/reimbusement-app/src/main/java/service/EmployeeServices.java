@@ -6,10 +6,13 @@ import dao.DAOFactory;
 import dao.ReimbDao;
 import dao.UserDao;
 import model.Reimbursement;
+import model.User;
+import dao.UserDaoPostgres;
 
 public class EmployeeServices implements EmployeeServicesInterface  {
 	private UserDao ud; 
 	private ReimbDao rd; 
+	UserDaoPostgres udp = new UserDaoPostgres(); 
 	
 	public void UserServiceImplementation() {
 		ud = DAOFactory.getDAOFactory().getUserDao();
@@ -19,9 +22,10 @@ public class EmployeeServices implements EmployeeServicesInterface  {
 		rd = DAOFactory.getDAOFactory().getReimbDao();
 	}
 
-	@Override
-	public void submitReimbursementRequest() {
+	public Reimbursement submitReimbursementRequest(Reimbursement t) {
 		// TODO Auto-generated method stub
+		rd = DAOFactory.getDAOFactory().getReimbDao(); 
+		return rd.add(t); 
 		
 	}
 
@@ -43,7 +47,6 @@ public class EmployeeServices implements EmployeeServicesInterface  {
 		return null;
 	}
 
-	@Override
 	public void viewEmployeeInfo() {
 		// TODO Auto-generated method stub
 		
@@ -54,5 +57,18 @@ public class EmployeeServices implements EmployeeServicesInterface  {
 		// TODO Auto-generated method stub
 		
 	}
+
+	public Reimbursement submitReimbursementRequest1(Reimbursement t) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public User viewEmployeeInfo(String username) {
+		// TODO Auto-generated method stub
+		User user = udp.getByUsername(username);
+		return user; 
+	}
+
 
 }

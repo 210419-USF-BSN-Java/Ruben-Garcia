@@ -86,6 +86,8 @@ const sendPostRequestReimbSub = async function sendData(jsDataObject){
         }catch(e){
             console.log("error")
         }
+
+        //add method to let user to let them  know submission was successful and clear form inputs 
             
     }
 
@@ -136,3 +138,20 @@ stateButton.addEventListener("click", function(event){
 })
 
 window.onload = getUserInfo;
+
+const getUserPendingRequest = async function getPendingRequest(state){
+            let userId = state.user.id
+            let data = await fetch("http://localhost:8080/reimbursement-app/getEmployeeInfo",{
+                body: JSON.stringify(jsDataObject),
+                headers: {
+                    "Content-type": "application/json; charset=UTF-8"
+                }
+            })
+            .then(Response => Response.json())
+            try{
+                userData = JSON.parse(data)
+            } catch(e){
+                userData = data
+            }
+            state.user = userData
+        }

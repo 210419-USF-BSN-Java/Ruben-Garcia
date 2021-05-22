@@ -10,8 +10,8 @@ public interface EmployeeServicesInterface {
 	 
 	public Reimbursement submitReimbursementRequest(Reimbursement t);
 	public void submitImageToReimbRequest();
-	public List<Reimbursement> viewPendingRequests();
-	public List<Reimbursement> viewResolvedRequests(); 
+	public List<Reimbursement> viewUserPendingRequests();
+	public List<Reimbursement> viewUserResolvedRequests(); 
 	public User viewEmployeeInfo(String username); 
 	public void updateInfo(); 
 	

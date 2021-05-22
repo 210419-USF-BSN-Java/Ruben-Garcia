@@ -11,6 +11,7 @@ public class Reimbursement implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	@JsonProperty("reimb_id")
 	private int reimb_id; 
 	@JsonProperty("reimb_amount")
 	private double reimb_amount; 
@@ -18,12 +19,14 @@ public class Reimbursement implements Serializable {
 	private Date reimb_resolved; 
 	@JsonProperty("reimb_desc")
 	private String reimb_description; 
-	@JsonProperty("reimb_recip")
 	private byte[] reimb_receipt; //for blob sql type
+	@JsonProperty("reimb_author")
 	private int reimb_author; 
+	@JsonProperty("reimb_resolver")
 	private int reimb_resolver;
+	@JsonProperty("reimb_status_id")
 	private int reimb_status_id; 
-	@JsonProperty("reimb_type")
+	@JsonProperty("reimb_type_id")
 	private int reimb_type_id; 
 	
 	public Reimbursement() {

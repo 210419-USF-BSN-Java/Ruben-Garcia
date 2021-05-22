@@ -15,6 +15,8 @@ import util.ConnectionUtil;
 public class ReimbDaoPostgres implements ReimbDao {
 	//TODO  test 
 	@Override
+	//specify to only add values based on form details 
+	//TODO 
 	public Reimbursement add(Reimbursement t) {
 		String sql = "insert into public.ers_reimbursement (reimb_amount, reimb_description, reimb_receipt, reimb_author, reimb_resolver, reimb_status_id,reimb_type_id )\n" + 
 				"values(?,?,?, ?,?,?,?) returning reimb_id;\n";

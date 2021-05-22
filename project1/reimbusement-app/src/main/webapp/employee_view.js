@@ -4,17 +4,18 @@ submitButtonReimb.addEventListener("click", function(event){
     
 let reimb_type = document.getElementById("Reimbursement-type").value; //works as intended 
 let reimb_amount = document.getElementById("reimbursement-amount").value; 
-let reimb_receipt = document.getElementById("receipt").value;//need to research 
-let reimb_descr = document.getElementById("reimb_desc").value
+//let reimb_receipt = document.getElementById("receipt").value;//need to research how to deserialize this for jackson api
+let reimb_desc = document.getElementById("reimb_desc").value
 event.preventDefault(); 
-console.log(reimb_type, reimb_amount, reimb_descr, reimb_receipt)
-let formDataSubmitted = packageFormInput(reimb_type, reimb_amount, reimb_receipt,reimb_descr); //creates object from input values
+let formDataSubmitted = packageFormInput(reimb_type, reimb_amount,reimb_desc); //creates object from input values
 console.log(formDataSubmitted);
 let dataReady = packageReimbPostRequest(formDataSubmitted, state)
 console.log("here is the data that will be sent for reimbursement submission " + dataReady)
+sendData(dataReady); 
+
 })
 
-function packageFormInput (reimb_type="Lodging", reimb_amount, reimb_recipt = null, reimb_desc){
+function packageFormInput (reimb_type="Lodging", reimb_amount, reimb_desc){
     const reimb_types = [1,2,3,4]
     let r = reimb_type
     let reimb_type_id; 
@@ -24,28 +25,32 @@ function packageFormInput (reimb_type="Lodging", reimb_amount, reimb_recipt = nu
     if(r === "Food") reimb_type_id = 3
     if(r === "Other") reimb_type_id = 4
     return {
-        reimb_type: reimb_type,
         reimb_amount: reimb_amount, 
-        reimb_recipt: reimb_recipt,
         reimb_desc: reimb_desc, 
         reimb_type_id: reimb_type_id
     }
 }
-
+//packages object to mirror reimbursement model add(method needs)
 function packageReimbPostRequest(formData, currentSessionUser){
     return{
-        reimb_type: formData.reimb_type,
         reimb_amount: formData.reimb_amount, 
-        reimb_recipt: formData.reimb_recipt,
+        //reimb_recipt: formData.reimb_recipt,
         reimb_desc: formData.reimb_desc, 
         reimb_type_id: formData.reimb_type_id, 
         reimb_author: currentSessionUser.user.id,
-        reimb_status_id: 1
+        reimb_status_id: 1, 
+        reimb_id: null,
+        reimb_resolver: null 
+
+
     }
 }
 
 function sendData(jsDataObject){
+    sendPostRequestReimbSub(jsDataObject);
+    console.log("post request for form submission sent")
     //XHR method 
+    /*
     let jsonData = JSON.stringify(jsDataObject);
     let xhr = new XMLHttpRequest(); 
     let url = "/reimbursement_submit"; 
@@ -53,14 +58,37 @@ function sendData(jsDataObject){
 
     xhr.setRequestHeader("Content-Type", "application/json")
     xhr.send(jsonData);
-    let resultP = document.getElementsByClassName("result")
+    let resultP = document.getElementById("result")
     xhr.onreadystatechange = function(){
         if(xhr.readyState === 4 && xhr.status === 200){
             resultP.innerHTML = this.responseText;
+        }else{
+            resultP.innerHTML = "not 200 status"
         }
     }
+    */
+
 
 }
+
+const sendPostRequestReimbSub = async function sendData(jsDataObject){
+        try{
+            fetch("http://localhost:8080/reimbursement-app/reimbursement_submit", {
+                method: "Post",
+                body: JSON.stringify(jsDataObject),
+                headers: {
+                    "Content-type": "application/json; charset=UTF-8"
+                }
+            })
+            .then(function(){
+                console.log("ok")
+            })
+        }catch(e){
+            console.log("error")
+        }
+            
+    }
+
 
 const getUserInfoButton = document.getElementById("get-user-info");
 

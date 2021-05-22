@@ -3,6 +3,7 @@ import service.EmployeeServices;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.stream.Collectors;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -25,13 +26,22 @@ public class SubmitReimbServlet extends HttpServlet {
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
 		System.out.println("service method was called: " + request.getMethod() + " to " + request.getRequestURI());
 		PrintWriter out = response.getWriter(); 
-		HttpSession session = request.getSession(false); 
 		//TODO 
 		//get user session data for reimbursement post from front end; mix object from employeeinit to the reimbursement object
 		ObjectMapper objectMapper = new ObjectMapper();
-		
-		Reimbursement reim = objectMapper.readValue(request, Reimbursement.class); 
-		//pass mapped object to the submit reimbursement service 
+		String requestData = request.getReader().lines().collect(Collectors.joining()); //from stack overflow lol: https://stackoverflow.com/questions/1548782/retrieving-json-object-literal-from-httpservletrequest
+		System.out.println(requestData);
+		try {
+			Reimbursement reim = objectMapper.readValue(requestData, Reimbursement.class); 
+			//pass mapped object to the submit reimbursement service
+			//having issues where values not specificed are given values e.g., I was dependent on the dao to give default values for null values in object
+			EmployeeServices es = new EmployeeServices(); 
+			Reimbursement createdItem = es.submitReimbursementRequest(reim); 
+			System.out.println(reim); 
+			System.out.println(createdItem); 
+		}catch(IOException e) {
+			e.printStackTrace();
+		}
 		
 	}
 }

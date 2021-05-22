@@ -13,16 +13,25 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import model.Reimbursement;
+
 @WebServlet(value="/reimbursement_submit")
 public class SubmitReimbServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L; 
 	EmployeeServices es = new EmployeeServices();
 	
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
-	
 		System.out.println("service method was called: " + request.getMethod() + " to " + request.getRequestURI());
 		PrintWriter out = response.getWriter(); 
+		HttpSession session = request.getSession(false); 
+		//TODO 
+		//get user session data for reimbursement post from front end; mix object from employeeinit to the reimbursement object
+		ObjectMapper objectMapper = new ObjectMapper();
 		
+		Reimbursement reim = objectMapper.readValue(request, Reimbursement.class); 
+		//pass mapped object to the submit reimbursement service 
 		
 	}
 }

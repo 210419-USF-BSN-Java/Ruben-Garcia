@@ -18,20 +18,28 @@ public class ReimbDaoPostgres implements ReimbDao {
 	//specify to only add values based on form details 
 	//TODO 
 	public Reimbursement add(Reimbursement t) {
-		String sql = "insert into public.ers_reimbursement (reimb_amount, reimb_description, reimb_receipt, reimb_author, reimb_resolver, reimb_status_id,reimb_type_id )\n" + 
-				"values(?,?,?, ?,?,?,?) returning reimb_id;\n";
+		String sql = "insert into public.ers_reimbursement (reimb_amount, reimb_description, reimb_receipt, reimb_author, reimb_status_id,reimb_type_id )\n" + 
+				"values(?, ?,?,?,?,?) returning reimb_id;\n";
+		Reimbursement insertObject = t; 
+		Double amount = t.getReimb_amount();
+		String desc = t.getReimb_description();
+		byte[] reeipt = t.getReimb_receipt();
+		int author = t.getReimb_author(); 
+		int reimb_type = t.getReimb_type_id();
+		int status = t.getReimb_status_id(); 
 		Reimbursement reim = null;
+		//above was not neccessary 
 		try {
 			Connection c = ConnectionUtil.getConnection(); 
+			c.setAutoCommit(false);
 			PreparedStatement ps = c.prepareStatement(sql); 
 			ps.setDouble(1, t.getReimb_amount());
 			ps.setString(2, t.getReimb_description());
 			ps.setBytes(3, t.getReimb_receipt());
 			ps.setInt(4, t.getReimb_author());
-			ps.setInt(5, t.getReimb_resolver());
-			ps.setInt(6, t.getReimb_status_id());
-			ps.setInt(7, t.getReimb_type_id());
-			
+			ps.setInt(5, t.getReimb_status_id());
+			ps.setInt(6, t.getReimb_type_id());
+			//add control, to database default value for status to pending when using this method
 			ResultSet rs = ps.executeQuery();
 			
 			if(rs.next()) {

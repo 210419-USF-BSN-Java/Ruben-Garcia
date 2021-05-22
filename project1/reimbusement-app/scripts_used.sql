@@ -45,6 +45,12 @@ create table public.ERS_REIMBURSEMENT (
 	foreign key (REIMB_TYPE_ID) references public.ERS_REIMBURSEMENT_TYPE(REIMB_TYPE_ID) on delete cascade
 );
 
+alter table public.ers_reimbursement alter column reimb_resolver drop not null
+
+
+
+
+
 -----------------inserts 
 ---todo; create query to insert into both users reimbursements 
 ---

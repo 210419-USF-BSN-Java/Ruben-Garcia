@@ -2,12 +2,15 @@ package model;
 
 import java.io.Serializable;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class Reimbusement_Type implements Serializable{
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 	private int reimb_type_id; 
+	@JsonProperty("reimb_type")
 	private String reimb_type;
 	
 	public Reimbusement_Type() {

@@ -4,20 +4,26 @@ import java.io.Serializable;
 import java.sql.Blob;
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class Reimbursement implements Serializable {
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 	private int reimb_id; 
+	@JsonProperty("reimb_amount")
 	private double reimb_amount; 
 	private Date reimb_submitted; 
 	private Date reimb_resolved; 
+	@JsonProperty("reimb_desc")
 	private String reimb_description; 
+	@JsonProperty("reimb_recip")
 	private byte[] reimb_receipt; //for blob sql type
 	private int reimb_author; 
 	private int reimb_resolver;
 	private int reimb_status_id; 
+	@JsonProperty("reimb_type")
 	private int reimb_type_id; 
 	
 	public Reimbursement() {

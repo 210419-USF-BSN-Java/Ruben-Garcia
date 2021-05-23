@@ -35,8 +35,10 @@ public class EmployeeViewInitServlet extends HttpServlet {
 			EmployeeServices es = new EmployeeServices();
 			User user = es.viewEmployeeInfo(username);
 			int userid = user.getId();
+			int userRoleId = user.getUserRoleId(); 
 			session.setAttribute("userObject", user);
 			session.setAttribute("userId", userid);
+			session.setAttribute("roleId", userRoleId);
 			ObjectMapper obj = new ObjectMapper();
 			String jsonFormat = obj.writeValueAsString(user);; //trying something different, via session to get user details for app access
 			PrintWriter out = response.getWriter(); 

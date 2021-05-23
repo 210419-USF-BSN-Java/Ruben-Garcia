@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-@WebServlet(value="/reimbursement_submit")
+@WebServlet(value="/reimbursement_resolve")
 public class UpdateReimTicketServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L; 
 	ManagerService es = new ManagerService();

@@ -37,11 +37,12 @@ public class ManagerService implements ManagerServicesInterface {
 	}
 
 
-	public int resolveReimb(String username, int reimb_status_id) {
-		User user = up.getByUsername(username);
+	public int resolveReimb(String status, String manager_username, int reimb_id) {
+		User user = up.getByUsername(manager_username);
 		int userId = user.getId();
+		int didExecute = rdp.updateReimb(status, userId, reimb_id);
 		
-		return 0;
+		return didExecute; 
 	}
 
 	@Override
@@ -62,6 +63,12 @@ public class ManagerService implements ManagerServicesInterface {
 
 	@Override
 	public int resolveReimb() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int resolveReimb(String username, int reimb_status_id) {
 		// TODO Auto-generated method stub
 		return 0;
 	}

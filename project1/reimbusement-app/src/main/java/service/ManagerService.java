@@ -60,4 +60,10 @@ public class ManagerService implements ManagerServicesInterface {
 		return userReimbHistory; 
 	}
 
+	@Override
+	public int resolveReimb() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
 }

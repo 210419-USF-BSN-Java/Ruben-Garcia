@@ -139,19 +139,39 @@ stateButton.addEventListener("click", function(event){
 
 window.onload = getUserInfo;
 
-const getUserPendingRequest = async function getPendingRequest(state){
-            let userId = state.user.id
-            let data = await fetch("http://localhost:8080/reimbursement-app/getEmployeeInfo",{
-                body: JSON.stringify(jsDataObject),
-                headers: {
-                    "Content-type": "application/json; charset=UTF-8"
-                }
-            })
+let pendingReim; 
+let resolvedReim; 
+const viewPendingReimbursementsButton = document.getElementById("show-pending-request")
+viewPendingReimbursementsButton.addEventListener("click", function(event){
+    console.log("pending viewPendingReimbursements funtion called"); 
+    getUserPendingReimData()
+})
+
+const viewResolvedReimbursementsButton = document.getElementById("show-resolved-request")
+viewResolvedReimbursementsButton.addEventListener("click", function(event){
+    console.log("resolved viewResolvedReimbursements funtion called"); 
+    getUserResolvedReimbData()
+})
+
+const getUserResolvedReimbData = async function(){
+    let data = await fetch("http://localhost:8080/reimbursement-app/getEmployeeResolvedRequest").then(Response => Response.json())
+    .then(data => console.log(data))
+    try{      
+        resolvedReim = JSON.parse(data)
+    } catch(e){
+      resolvedReim = data
+    }
+    console.log(resolvedReim)
+}
+
+const getUserPendingReimData = async function getPendingRequest(){
+            let data = await fetch("http://localhost:8080/reimbursement-app/getEmployeePendingRequest")
             .then(Response => Response.json())
+            .then(data => console.log(data))
             try{
-                userData = JSON.parse(data)
+                pendingReim = JSON.parse(data)
             } catch(e){
-                userData = data
+                pendingReim = data
             }
-            state.user = userData
-        }
+            console.log(pendingReim)
+    }

@@ -1,6 +1,7 @@
 package service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import dao.DAOFactory;
@@ -68,11 +69,34 @@ public class EmployeeServices implements EmployeeServicesInterface  {
 	List<Reimbursement> allReimbs = rdp.getAll();
 
 	public List<Reimbursement> viewUserPendingRequests(int id) {
-		Int id1 = id; 
+		int id1 = id; 
 		// TODO Auto-generated method stub
 		Stream<Reimbursement> list = allReimbs.stream(); 
 		//find way to convert int id to INT 
-		Stream<Reimbursement>usersPendingRequests = list.filter(t -> t.getReimb_author().equals(id1) && t.getReimb_status_id().equals(1)); 
+		List<Reimbursement> userpendingrequest =  list.filter(t -> t.getReimb_author() == (id1) && t.getReimb_status_id() == 1).collect(Collectors.toList());  
+		System.out.println(userpendingrequest); 
+		if(userpendingrequest.isEmpty()) {
+			System.out.println("list is empty");
+		}
+		return userpendingrequest; 
+	}
+
+	public List<Reimbursement> viewUserResolvedRequests(int id) {
+		// TODO Auto-generated method stub
+		int id1 = id; 
+		// TODO Auto-generated method stub
+		Stream<Reimbursement> list = allReimbs.stream(); 
+		//find way to convert int id to INT 
+		List<Reimbursement> userresolvedrequest =  list.filter(t -> t.getReimb_author() == (id1) && ((t.getReimb_status_id() == 3) || t.getReimb_status_id() == 2)).collect(Collectors.toList()); 
+		if(userresolvedrequest.isEmpty()) {
+			System.out.println("the list from viewUser'sresolved reimbursements list is " +userresolvedrequest + " this list is empty");
+		}
+		return userresolvedrequest; 
+	}
+
+	@Override
+	public List<Reimbursement> viewUserPendingRequests() {
+		// TODO Auto-generated method stub
 		return null;
 	}
 

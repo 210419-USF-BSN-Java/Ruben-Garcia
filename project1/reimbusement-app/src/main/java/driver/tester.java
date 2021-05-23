@@ -2,11 +2,13 @@ package driver;
 import dao.UserDaoPostgres;
 import model.Reimbursement;
 import model.User;
+import service.EmployeeServices;
 import dao.ReimbDaoPostgres;
 
 public class tester {
 
 	public static void main(String[] args) {
+		/*
 		User tester = new User( 10,"tester12", "password", "jake", "parker", "spoof1@gmail.com", 1);
 		Reimbursement reimb = new Reimbursement(  ); 
 				
@@ -22,6 +24,10 @@ public class tester {
 		System.out.println(s);
 		int r = u.getRoleIdOfUser("benEmployee"); 
 		System.out.println(r);
+		*/
+		EmployeeServices es = new EmployeeServices(); 
+		es.viewUserPendingRequests(2); 
+		es.viewUserResolvedRequests(2);
 		}
 	
 

@@ -136,7 +136,7 @@ const stateButton = document.getElementById("check-user-state")
 stateButton.addEventListener("click", function(event){
     console.log(state.user)
 })
-
+//this get user's info upon logging in
 window.onload = getUserInfo;
 
 let pendingReim; 
@@ -176,4 +176,42 @@ const getUserPendingReimData = async function getPendingRequest(){
             console.log(pendingReim)
     }
 
+   const editInfoForm = document.getElementById("edit_user_submit"); 
+   editInfoForm.addEventListener("click",function(event){
+        let firstName = document.getElementById("edit-first-name").value; 
+        let lastName = document.getElementById("edit-last-name").value;
+        let email = document.getElementById("edit-email").value; 
+        let password = document.getElementById("edit-password").value; 
+        let jsData = packageEditUserInfo(firstName, lastName, email, password)
+        console.log(jsData)
+        sendPostRequestUpdateUserInfo(jsData)
+   })
    
+   function packageEditUserInfo(firstName, lastName, email, password){
+       return {
+           firstName: firstName, 
+           lastName: lastName, 
+           email: email, 
+           password: password
+       }
+   }
+
+   const sendPostRequestUpdateUserInfo = async function sendData(jsDataObject){
+        try{
+            fetch("http://localhost:8080/reimbursement-app/UpdateUserInfo", {
+                method: "Post",
+                body: JSON.stringify(jsDataObject),
+                headers: {
+                    "Content-type": "application/json; charset=UTF-8"
+                }
+            })
+            .then(function(){
+                console.log("ok")
+            })
+        }catch(e){
+            console.log("error")
+        }
+
+        //add method to let user to let them  know submission was successful and clear form inputs 
+            
+    }

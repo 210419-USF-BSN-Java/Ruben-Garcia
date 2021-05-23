@@ -53,9 +53,9 @@ public class EmployeeServices implements EmployeeServicesInterface  {
 		
 	}
 
-	@Override
-	public void updateInfo() {
-		// TODO Auto-generated method stub
+	public int updateInfo(User t) {
+		int status = udp.update(t); 
+		return status;
 		
 	}
 

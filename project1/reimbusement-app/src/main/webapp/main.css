@@ -79,3 +79,7 @@ body {
 .layout {
     display: grid;
 }
+
+.hide {
+  display: none; 
+}

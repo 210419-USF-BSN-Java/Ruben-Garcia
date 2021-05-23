@@ -106,5 +106,11 @@ public class EmployeeServices implements EmployeeServicesInterface  {
 		return null;
 	}
 
+	@Override
+	public void updateInfo() {
+		// TODO Auto-generated method stub
+		
+	}
+
 
 }

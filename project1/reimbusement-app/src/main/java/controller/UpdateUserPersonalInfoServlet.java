@@ -16,14 +16,12 @@ import javax.servlet.http.HttpSession;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import jdk.internal.org.jline.utils.Status;
-
-@WebServlet(value="/reimbursement_submit")
+@WebServlet(value="/UpdateUserInfo")
 public class UpdateUserPersonalInfoServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L; 
-	EmployeeServices es = new EmployeeServices();
 	
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+		/*
 		PrintWriter out = response.getWriter(); 
 		//set userid attribute to new object user created from form data; service method requires userid 
 		//TODO 
@@ -32,6 +30,7 @@ public class UpdateUserPersonalInfoServlet extends HttpServlet {
 		String requestData = request.getReader().lines().collect(Collectors.joining()); //from stack overflow lol: https://stackoverflow.com/questions/1548782/retrieving-json-object-literal-from-httpservletrequest
 		System.out.println(requestData);
 		try {
+			//TODO  
 			User newUserObject = objectMapper.readValue(requestData, Reimbursement.class); 
 			//pass mapped object to the submit reimbursement service
 			//having issues where values not specificed are given values e.g., I was dependent on the dao to give default values for null values in object
@@ -43,6 +42,6 @@ public class UpdateUserPersonalInfoServlet extends HttpServlet {
 		}catch(IOException e) {
 			e.printStackTrace();
 		}
-		
+		*/
 	}
 }

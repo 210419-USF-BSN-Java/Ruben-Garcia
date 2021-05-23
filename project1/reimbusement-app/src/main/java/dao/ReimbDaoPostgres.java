@@ -6,6 +6,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -134,6 +137,39 @@ public class ReimbDaoPostgres implements ReimbDao {
 			ps.setInt(6, t.getReimb_resolver());
 			ps.setInt(7, t.getReimb_status_id());
 			ps.setInt(8, t.getReimb_type_id());
+			
+			r = ps.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return r;
+	}
+	
+	public Integer updateReimb(String status, int manager_id, int reimb_id) {
+		// TODO test, designed to not be able to change time submitted stamp
+		int managerId = manager_id; 
+		java.util.Date timestamp = new Timestamp(System.currentTimeMillis());
+		String input = status.toLowerCase();
+		int reimb_status = 0;
+		if(input=="accept") {
+			reimb_status = 2; 
+		}
+		if(input =="reject"){
+			reimb_status = 3;
+		}
+		
+		int r = -1;
+		String sql = "update public.ers_reimbursement \n" + 
+				"reimb_resolved =?, reimb_resolver=?, reimb_status_id = ? \n" + 
+				"where reimb_id = ?;\n";
+		try{
+			Connection c = ConnectionUtil.getConnection();
+			PreparedStatement ps = c.prepareStatement(sql);
+			ps.setDate(1, (Date) timestamp);
+			ps.setInt(2, managerId);
+			ps.setInt(3, reimb_status);
+			ps.setInt(4, reimb_id);
 			
 			r = ps.executeUpdate();
 		} catch (SQLException e) {

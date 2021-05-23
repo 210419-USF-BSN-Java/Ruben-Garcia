@@ -104,17 +104,15 @@ public class UserDaoPostgres implements UserDao {
 	//TODO 
 	@Override
 	public Integer update(User t) {
-		String sql = "update public.ers_users set ers_username = ? , public.ers_password = ? , public.user_first_name = ? , public.user_last_name = ?, public.user_email = ?, role_id = ? where ers_user_id = ? ;\n";
+		String sql = "update public.ers_users, public.ers_password = ? , public.user_first_name = ? , public.user_last_name = ?, public.user_email = ? where ers_user_id = ? ;\n";
 		int r = -1;
 		try {
 			Connection c = ConnectionUtil.getConnection(); 
 			PreparedStatement ps = c.prepareStatement(sql); 
-			ps.setString(1, t.getUsername());
-			ps.setString(2, t.getPassword());
-			ps.setString(3, t.getFirstName());
-			ps.setString(4, t.getLastName());
-			ps.setString(5, t.getEmail());
-			ps.setInt(6, t.getUserRoleId());
+			ps.setString(1, t.getPassword());
+			ps.setString(2, t.getFirstName());
+			ps.setString(3, t.getLastName());
+			ps.setString(4, t.getEmail());
 			r = ps.executeUpdate();
 			
 		}catch(SQLException e) {

@@ -13,6 +13,7 @@ public class Home extends HttpServlet{
         //just like demo
         //response.sendRedirect("static/index.html");
         
-        ((HttpServletResponse) request).sendRedirect("static/index.html"); 
+//        ((HttpServletResponse) request).sendRedirect("static/index.html"); 
+    	request.getRequestDispatcher("static/index.html").forward(request, response);
     }
 }

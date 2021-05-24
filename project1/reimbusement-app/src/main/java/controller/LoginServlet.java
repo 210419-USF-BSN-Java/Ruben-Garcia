@@ -47,10 +47,10 @@ public class LoginServlet extends HttpServlet {
 			session.setAttribute("user", jsonFormat);
 			*/
 			if(ul.getRoleId(username) == 1) {
-				response.sendRedirect(request.getContextPath() +"/manager_view.html");
+				response.sendRedirect(request.getContextPath() +"/static/manager_view.html");
 			}
 			if(ul.getRoleId(username) == 2) {
-				response.sendRedirect(request.getContextPath() + "/employee_view.html");
+				response.sendRedirect(request.getContextPath() + "/static/employee_view.html");
 			}
 		}else {
 			RequestDispatcher rd = request.getRequestDispatcher("index.html");

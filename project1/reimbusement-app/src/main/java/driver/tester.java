@@ -3,6 +3,9 @@ import dao.UserDaoPostgres;
 import model.Reimbursement;
 import model.User;
 import service.EmployeeServices;
+
+import java.util.Calendar;
+
 import dao.ReimbDaoPostgres;
 
 public class tester {
@@ -28,7 +31,16 @@ public class tester {
 		EmployeeServices es = new EmployeeServices(); 
 		es.viewUserPendingRequests(2); 
 		es.viewUserResolvedRequests(2);
+		
+		java.util.Date utilDate = new java.util.Date();
+		Calendar cal = Calendar.getInstance();
+		cal.setTime(utilDate);
+		cal.set(Calendar.MILLISECOND, 0);
+		java.sql.Timestamp time = new java.sql.Timestamp(utilDate.getTime()); 
+		System.out.println(time);
 		}
+	
+	
 	
 
 }

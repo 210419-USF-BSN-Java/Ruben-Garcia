@@ -71,8 +71,7 @@ getAllPendingRequests.addEventListener("click", function(event){
 })
 
 
-let employeeHeaders = ["First Name", "Last Name", "Username", "UserType"];
-tableDiv = document.getElementById("list-of-employees"); 
+
 getAllEmployeeList = document.getElementById("get-all-employees")
 getAllEmployeeList.addEventListener("click", function(event){
     let list; 

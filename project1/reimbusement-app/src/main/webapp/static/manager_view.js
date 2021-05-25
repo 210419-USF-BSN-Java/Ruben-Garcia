@@ -71,22 +71,42 @@ getAllPendingRequests.addEventListener("click", function(event){
 })
 
 
-getAllResolvedRequests = document.getElementById("view-all-resolved-requests")
-getAllResolvedRequests.addEventListener("click", function(event){
+let employeeHeaders = ["First Name", "Last Name", "Username", "UserType"];
+tableDiv = document.getElementById("list-of-employees"); 
+getAllEmployeeList = document.getElementById("get-all-employees")
+getAllEmployeeList.addEventListener("click", function(event){
     let list; 
-    console.log("get all resolved requests endpoint called")
+    console.log("get all employees endpoint fetched")
     async function getInfo(){
-         let data = await fetch("http://localhost:8080/reimbursement-app/getAllResolvedRequests")
+         let data = await fetch("http://localhost:8080/reimbursement-app/getAllEmployee")
          .then(Response => Response.json())
         try{
             list = JSON.parse(data)
         } catch(e){
             list  = data
         }
+        console.log(typeof list)
+        let temp = ""
+        let roleName; 
+        if (list.userRoleId = 1)roleName = "Manager"
+        if(list.userRoleId = 2) roleName = "Employee"
 
-        console.log(list)
+        if(list.length >0){
+            list.forEach(element => {
+                temp += "<tr>";
+                temp += "<td>"+ element.id+"</td>"
+                temp += "<td>"+ element.username+"</td>"
+                temp += "<td>"+ element.firstName +"</td>"
+                temp += "<td>"+ element.lastName +"</td>"
+                temp += "<td>"+ element.email+"</td>"
+                temp += "<td>" + roleName+ "</td>"
+                temp += "</tr>"
+            }) 
+            document.getElementById("all-employee-list-data").innerHTML = temp;
+        }
     }
     getInfo();
+    //comment
 })
 
 //fetch method for updating ticket

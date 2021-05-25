@@ -9,11 +9,15 @@ import java.sql.Statement;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.time.Instant;
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import model.Reimbursement;
 import util.ConnectionUtil;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class ReimbDaoPostgres implements ReimbDao {
 	//TODO  test 
@@ -146,29 +150,35 @@ public class ReimbDaoPostgres implements ReimbDao {
 		return r;
 	}
 	
-	public Integer updateReimb(String status, int manager_id, int reimb_id) {
+	public Integer updateReimb(int inputStatus, int manager_id, int reimb_id) {
 		// TODO test, designed to not be able to change time submitted stamp
 		int managerId = manager_id; 
-		java.util.Date timestamp = new Timestamp(System.currentTimeMillis());
-		String input = status.toLowerCase();
-		int reimb_status = 0;
-		if(input=="accept") {
-			reimb_status = 2; 
-		}
-		if(input =="reject"){
-			reimb_status = 3;
-		}
+		/*
+		LocalDateTime localDate = LocalDateTime.now(); 
+		DateTimeFormatter dtf = DateTimeFormatter.ISO_LOCAL_DATE;
+		String timestamp =	dtf.format(localDate); 
+		Timestamp ts = Timestamp.valueOf(timestamp); 
+		more pain
+		*/
+		java.util.Date utilDate = new java.util.Date();
+		Calendar cal = Calendar.getInstance();
+		cal.setTime(utilDate);
+		cal.set(Calendar.MILLISECOND, 0);
+		java.sql.Timestamp time = new java.sql.Timestamp(utilDate.getTime()); 
+		//pain
+		int input = inputStatus;
+	
 		
 		int r = -1;
-		String sql = "update public.ers_reimbursement \n" + 
+		String sql = "update public.ers_reimbursement set\n" + 
 				"reimb_resolved =?, reimb_resolver=?, reimb_status_id = ? \n" + 
 				"where reimb_id = ?;\n";
 		try{
 			Connection c = ConnectionUtil.getConnection();
 			PreparedStatement ps = c.prepareStatement(sql);
-			ps.setDate(1, (Date) timestamp);
+			ps.setTimestamp(1, time);
 			ps.setInt(2, managerId);
-			ps.setInt(3, reimb_status);
+			ps.setInt(3, input);
 			ps.setInt(4, reimb_id);
 			
 			r = ps.executeUpdate();

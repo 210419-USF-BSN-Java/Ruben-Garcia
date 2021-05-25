@@ -37,10 +37,10 @@ public class ManagerService implements ManagerServicesInterface {
 	}
 
 
-	public int resolveReimb(String status, String manager_username, int reimb_id) {
+	public int resolveReimb(int inputStatus, String manager_username, int reimb_id) {
 		User user = up.getByUsername(manager_username);
 		int userId = user.getId();
-		int didExecute = rdp.updateReimb(status, userId, reimb_id);
+		int didExecute = rdp.updateReimb(inputStatus, userId, reimb_id);
 		
 		return didExecute; 
 	}

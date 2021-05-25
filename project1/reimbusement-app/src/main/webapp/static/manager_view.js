@@ -90,24 +90,52 @@ getAllResolvedRequests.addEventListener("click", function(event){
 })
 
 //fetch method for updating ticket
-/*
+
 updateTicketButton = document.getElementById("update-ticket-submit")
-getAllResolvedRequests.addEventListener("click", function(event){
-    let list; 
-    console.log("post request for updating a pending ticket issued")
-    async function getInfo(){
-         let data = await fetch("http://localhost:8080/reimbursement-app/reimbursement_resolve", {
-             bo
-             method: "Post", 
+updateTicketButton.addEventListener("click", function(event){
+    event.preventDefault();
+    console.log("submit ticket update event listener clicked")
+    let reimId = document.getElementById("ticket-id").value
+    let updateStatusInput = document.querySelector('input[name="request-decision"]:checked').value;
+    let jsdata = packageUpdateTicket(reimId, updateStatusInput)
+    console.log(updateStatusInput + " string value for status update paramater")
+    console.log(reimId + " id that was updated")
+    console.log(jsdata + "js object sent to post request for updating a pending ticket issued; parsed as json")
+    sendData(jsdata); 
+})
+
+function sendData(jsObject){
+    sendPostRequest(jsObject)
+}
+
+ const sendPostRequest = async function updateTicket(data){
+        try{
+             fetch("http://localhost:8080/reimbursement-app/reimbursement_resolve", {
+             method: "Post",
+             body: JSON.stringify(data), 
              headers: {
                  "Content-type": "application/json; charset=UTF-8"
              }
          }
          )
+         .then(function(){
+             console.log("ok")
+         })
         
-
-        console.log(list)
+        }catch(e){
+            console.log("error")
+        } 
     }
-    getInfo();
-})
-*/
+
+function packageUpdateTicket(reimId, updateStatusInput ){
+    console.log(reimId)
+    console.log(updateStatusInput)
+    let status; 
+    console.log(status)
+    if(updateStatusInput === "reject") status = 3 
+    if(updateStatusInput === "accept") status = 2
+    return {
+        reimb_id: reimId, 
+        reimb_status_id: status 
+    }
+}

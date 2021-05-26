@@ -24,7 +24,7 @@
         </div>
      <div id="list-of-employees">
         <button id="get-all-employees">get table of all users</button>
-        <table class="employee-list table-stripped">
+        <table id="employees" class="employee-list table-stripped">
                 <thead>
                     <tr>
                         <th>Id</th>
@@ -43,9 +43,40 @@
     </div>
     <div id="view-all-pending-requests">
         <button id="get-all-pending-requests">get all pending reimbursement request</button>
+        <table id="pending-requests">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Reimb Author Id</th>
+                    <th>$ Amount</th>
+                    <th>Description</th>
+                    <th>Reimb Type</th>
+                    <th>Date Submitted</th>
+                </tr>
+            </thead>
+                 <tbody id="all-pending-reim-data">
+                    
+                </tbody>
+        </table>
+               
     </div>
      <div id="view-all-resolved-requests">
         <button id="get-all-resolved-requests">get history of resolved requests</button>
+        <table>
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Reimb Author Id</th>
+                    <th>$ Amount</th>
+                    <th>Description</th>
+                    <th>Reimb Type</th>
+                    <th>Date Submitted</th>
+                </tr>
+            </thead>
+                 <tbody id="all-resolved-reimrequest-data">
+                    
+                </tbody>
+        </table>
     </div>
     <div id="update-a-request-module">
         <button id="modal-opener">update a ticket </button>

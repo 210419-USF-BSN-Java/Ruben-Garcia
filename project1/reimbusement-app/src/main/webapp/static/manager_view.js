@@ -32,29 +32,51 @@ logoutButton.addEventListener("click", function(event){
     invalidate(); 
 })
 
-let employeeHeaders = ["First Name", "Last Name", "Username", "UserType"];
-tableDiv = document.getElementById("list-of-employees"); 
-getAllEmployeeList = document.getElementById("get-all-employees")
-getAllEmployeeList.addEventListener("click", function(event){
+//view all resolved requests
+getAllResolvedRequests = document.getElementById("get-all-resolved-requests")
+getAllResolvedRequests.addEventListener("click", function(event){
+    event.preventDefault();
     let list; 
-    console.log("get all employees endpoint fetched")
+    console.log("get all resolved requests endpoint called")
     async function getInfo(){
-         let data = await fetch("http://localhost:8080/reimbursement-app/getAllEmployee")
+         let data = await fetch("http://localhost:8080/reimbursement-app/getAllResolvedRequests")
          .then(Response => Response.json())
         try{
             list = JSON.parse(data)
         } catch(e){
             list  = data
         }
-
+        document.getElementById("all-resolved-reimrequest-data").innerHTML = "";
         console.log(list)
+         let temp = ""
+        let reimbType; 
+        console.log(list)
+        if(list.length > 0){
+            list.forEach(element => {
+                if(element.reimb_type_id === 1)reimbType="Lodging" 
+                if(element.reimb_type_id === 2)reimbType="Travel"
+                if(element.reimb_type_id === 3)reimbType="Food" 
+                if(element.reimb_type_id === 4)reimbType="Other"        
+                temp += "<tr>";
+                temp += "<td>"+ element.reimb_id+"</td>"
+                temp += "<td>"+ element.reimb_author+"</td>"
+                temp += "<td>"+ element.reimb_amount +"</td>"
+                temp += "<td>"+ element.reimb_desc +"</td>"
+                temp += "<td>"+ reimbType+"</td>"
+                temp += "<td>" + `${new Date(element.reimb_submitted)}` +"</td>"
+                temp += "</tr>"
+            }) 
+            console.log(temp)
+            document.getElementById("all-resolved-reimrequest-data").innerHTML = temp;
+        }
     }
     getInfo();
 })
 
+//view all pending requests
 getAllPendingRequests = document.getElementById("view-all-pending-requests")
 getAllPendingRequests.addEventListener("click", function(event){
-    let list; 
+    let list;
     console.log("get all pending requests endpoint called")
     async function getInfo(){
          let data = await fetch("http://localhost:8080/reimbursement-app/getAllPendingRequests")
@@ -64,14 +86,38 @@ getAllPendingRequests.addEventListener("click", function(event){
         } catch(e){
             list  = data
         }
-
         console.log(list)
+         let temp = ""
+        let reimbType; 
+        console.log(list)
+        if(list.length > 0){
+            list.forEach(element => {
+                if(element.reimb_type_id === 1)reimbType="Lodging" 
+                if(element.reimb_type_id === 2)reimbType="Travel"
+                if(element.reimb_type_id === 3)reimbType="Food" 
+                if(element.reimb_type_id === 4)reimbType="Other"        
+                temp += "<tr>";
+                temp += "<td>"+ element.reimb_id+"</td>"
+                temp += "<td>"+ element.reimb_author+"</td>"
+                temp += "<td>"+ element.reimb_amount +"</td>"
+                temp += "<td>"+ element.reimb_desc +"</td>"
+                temp += "<td>"+ reimbType+"</td>"
+                temp += "<td>" + `${new Date(element.reimb_submitted)}` +"</td>"
+                temp += "</tr>"
+            }) 
+            console.log(temp)
+            let new_tbody = document.createElement('tbody')
+            new_tbody.setAttribute('id', 'all-pending-reim-data')
+            new_tbody.innerHTML = temp; 
+            let old_tbody = document.getElementById("all-pending-reim-data");
+            old_tbody.parentNode.replaceChild(new_tbody, old_tbody)
+        }
     }
     getInfo();
 })
 
 
-
+//view all employees
 getAllEmployeeList = document.getElementById("get-all-employees")
 getAllEmployeeList.addEventListener("click", function(event){
     let list; 
@@ -84,7 +130,7 @@ getAllEmployeeList.addEventListener("click", function(event){
         } catch(e){
             list  = data
         }
-        console.log(typeof list)
+         console.log(typeof list)
         let temp = ""
         let roleName; 
         if (list.userRoleId = 1)roleName = "Manager"
@@ -103,8 +149,10 @@ getAllEmployeeList.addEventListener("click", function(event){
             }) 
             document.getElementById("all-employee-list-data").innerHTML = temp;
         }
+      
     }
     getInfo();
+     
     //comment
 })
 

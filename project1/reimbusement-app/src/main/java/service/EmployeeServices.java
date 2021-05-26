@@ -66,11 +66,12 @@ public class EmployeeServices implements EmployeeServicesInterface  {
 		return user; 
 	}
 	
-	List<Reimbursement> allReimbs = rdp.getAll();
+	
 
 	public List<Reimbursement> viewUserPendingRequests(int id) {
 		int id1 = id; 
 		// TODO Auto-generated method stub
+		List<Reimbursement> allReimbs = rdp.getAll();
 		Stream<Reimbursement> list = allReimbs.stream(); 
 		//find way to convert int id to INT 
 		List<Reimbursement> userpendingrequest =  list.filter(t -> t.getReimb_author() == (id1) && t.getReimb_status_id() == 1).collect(Collectors.toList());  
@@ -85,6 +86,7 @@ public class EmployeeServices implements EmployeeServicesInterface  {
 		// TODO Auto-generated method stub
 		int id1 = id; 
 		// TODO Auto-generated method stub
+		List<Reimbursement> allReimbs = rdp.getAll();
 		Stream<Reimbursement> list = allReimbs.stream(); 
 		//find way to convert int id to INT 
 		List<Reimbursement> userresolvedrequest =  list.filter(t -> t.getReimb_author() == (id1) && ((t.getReimb_status_id() == 3) || t.getReimb_status_id() == 2)).collect(Collectors.toList()); 

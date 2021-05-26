@@ -24,10 +24,11 @@ main {
   justify-content: center;
 }
 
-.user-info {
+.user-info .update-ticket-container {
   width: 50%;
   max-width: max-content;
   margin: 20px;
+  padding-left: 10px;
 }
 
 @media screen and (max-height: 450px) {
@@ -89,9 +90,6 @@ main {
 }
 
 .layout {
-    display: grid;
+    min-width: 70%;
 }
 
-.hide {
-  display: none; 
-}

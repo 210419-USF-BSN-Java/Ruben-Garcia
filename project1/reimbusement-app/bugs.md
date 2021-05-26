@@ -1,0 +1,1 @@
+bug: data won't reset upon click event, repeating requests but changes appear in database

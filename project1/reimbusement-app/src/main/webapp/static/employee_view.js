@@ -92,12 +92,6 @@ const sendPostRequestReimbSub = async function sendData(jsDataObject){
     }
 
 
-const getUserInfoButton = document.getElementById("get-user-info");
-
-getUserInfoButton.addEventListener('click', function(event){
-    console.log("clicked")
-})
-
 const getUserInfo = async function getInfo(){
             let data = await fetch("http://localhost:8080/reimbursement-app/getEmployeeInfo")
             .then(Response => Response.json())
@@ -124,20 +118,8 @@ logoutButton.addEventListener("click", function(event){
     invalidate(); 
 })
 
-//handles state of the user session, got data from getInfo() function; 
-//TODO update html page to fetch user data upon loading document
-let state = {
-    user: null
-}
 
 
-const stateButton = document.getElementById("check-user-state")
-//for debugging purposes
-stateButton.addEventListener("click", function(event){
-    console.log(state.user)
-})
-//this get user's info upon logging in
-window.onload = getUserInfo;
 
 let pendingReim; 
 let resolvedReim; 
@@ -260,4 +242,25 @@ const getUserPendingReimData = async function getPendingRequest(){
 
         //add method to let user to let them  know submission was successful and clear form inputs 
             
+    }
+
+
+    //toggle function 
+
+    function toggleHide(elementId){
+        let element = document.getElementById(elementId); 
+        element.classList.toggle("hide");
+    }
+    
+    //handles state of the user session, got data from getInfo() function; 
+//TODO update html page to fetch user data upon loading document
+let state = {
+    user: null
+}
+
+//this get user's info upon logging in
+    window.onload = function onloadInit(){
+        getUserInfo();
+        //getUserPendingReimData()
+        //getUserResolvedReimbData()
     }

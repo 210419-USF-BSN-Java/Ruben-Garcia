@@ -12,6 +12,22 @@
     <link href="main.css " rel="stylesheet">
     <script src="manager_view.js" defer></script>
 </head>
+  <header>
+    <ul class="nav justify-content-end">
+        <li class="nav-item">
+            <a class="nav-link " href="#">Dashboard</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#">Your Account</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#">About Us </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link " href="#">Logout</a>
+        </li>
+    </ul>
+    </header>
 <body>
   <div class="logout">
       <button id="logout">logout</button>
@@ -24,7 +40,7 @@
         </div>
      <div id="list-of-employees">
         <button id="get-all-employees">get table of all users</button>
-        <table id="employees" class="employee-list table-stripped">
+        <table id="employees" class="employee-list table">
                 <thead>
                     <tr>
                         <th>Id</th>
@@ -43,7 +59,7 @@
     </div>
     <div id="view-all-pending-requests">
         <button id="get-all-pending-requests">get all pending reimbursement request</button>
-        <table id="pending-requests">
+        <table id="pending-requests" class="table">
             <thead>
                 <tr>
                     <th>Id</th>

@@ -209,11 +209,12 @@ const getUserPendingReimData = async function getPendingRequest(){
                 temp += "<td>" + `${new Date(element.reimb_submitted)}` +"</td>"
                 temp += "</tr>"
             }) 
-            console.log(temp)
             let new_tbody = document.createElement('tbody')
             new_tbody.setAttribute('id', "user-pending-reim-data")
             new_tbody.innerHTML = temp; 
             let old_tbody = document.getElementById("user-pending-reim-data");
+            console.log("new table data" +new_tbody)
+            console.log("old table data" + old_tbody)
             old_tbody.parentNode.replaceChild(new_tbody, old_tbody)
         }
 

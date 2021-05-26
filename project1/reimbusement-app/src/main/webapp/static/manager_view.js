@@ -1,9 +1,6 @@
-const getUserInfoButton = document.getElementById("get-user-info");
 
-getUserInfoButton.addEventListener('click', function(event){
-    //userloggedin
-    console.log("clicked")
-    let userData;
+window.onload = function(){
+     let userData;
     async function getInfo(){
          let data = await fetch("http://localhost:8080/reimbursement-app/getEmployeeInfo")
          .then(Response => Response.json())
@@ -12,11 +9,21 @@ getUserInfoButton.addEventListener('click', function(event){
         } catch(e){
             userData = data
         }
-
+        state.user = userData
         console.log(userData)
     }
     getInfo();
-})
+}
+
+let state = {
+    user: null
+}
+
+function toggleHide(elementId){
+        let element = document.getElementById(elementId); 
+        element.classList.toggle("hide");
+}
+    
 
 const logoutButton = document.getElementById("logout");
 logoutButton.addEventListener("click", function(event){

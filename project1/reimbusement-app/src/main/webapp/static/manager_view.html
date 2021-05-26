@@ -12,34 +12,35 @@
     <link href="main.css " rel="stylesheet">
     <script src="manager_view.js" defer></script>
 </head>
-  <header>
+  
+<body>
+    <header>
     <ul class="nav justify-content-end">
         <li class="nav-item">
-            <a class="nav-link " href="#">Dashboard</a>
+            <a class="nav-link" onclick="toggleHide('my-info-container')" href="#">Dashboard</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="#">Your Account</a>
+            <a class="nav-link" onclick="toggleHide('update-ticket-container')" href="#">Resolve a Ticket</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="#">About Us </a>
+            <a class="nav-link" onclick="toggleHide('user-info')" href="#">Your Account Info </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link " href="#">Logout</a>
+            <a class="nav-link "  id="logout" href="#">Logout</a>
         </li>
     </ul>
     </header>
-<body>
-  <div class="logout">
-      <button id="logout">logout</button>
-  </div>
-
 <!------ Include the above in your HEAD tag ---------->
+ <aside> 
+        <h1 style="text-align: center;">Employee Reimbursement System</h1>
+    </aside>
+<main>
+
+
 <div class="layout">
-     <div class="employee-things">
-            <button id="get-user-info">Get current user logged in Info</button>
-        </div>
      <div id="list-of-employees">
-        <button id="get-all-employees">get table of all users</button>
+         <h3>View all the employees</h3>
+        <button id="get-all-employees">Get table of all users</button>
         <table id="employees" class="employee-list table">
                 <thead>
                     <tr>
@@ -58,7 +59,8 @@
         </table>
     </div>
     <div id="view-all-pending-requests">
-        <button id="get-all-pending-requests">get all pending reimbursement request</button>
+        <h3>View all pending reimbursement requests</h3>
+        <button id="get-all-pending-requests">Get all pending reimbursement request</button>
         <table id="pending-requests" class="table">
             <thead>
                 <tr>
@@ -77,8 +79,9 @@
                
     </div>
      <div id="view-all-resolved-requests">
-        <button id="get-all-resolved-requests">get history of resolved requests</button>
-        <table>
+         <h3>View all resolved reimbursement requests</h3>
+        <button id="get-all-resolved-requests">Get history of resolved requests</button>
+        <table class="table">
             <thead>
                 <tr>
                     <th>Id</th>
@@ -94,10 +97,10 @@
                 </tbody>
         </table>
     </div>
-    <div id="update-a-request-module">
-        <button id="modal-opener">update a ticket </button>
-    </div>
-    <div class="update-ticket-container">
+</div>
+
+ <div class="update-ticket-container hide" id="update-ticket-container">
+        <h3>Resolve a ticket</h3>
         <div class="reimb-form"> 
         <div  style="margin-top: 0%">
         <form  name="ticket-update" action="/static/reimbursement_resolve" method="POST">
@@ -112,14 +115,16 @@
                 <input type="radio" id="accept" name="request-decision" value="accept">
                 <label for="accept">Accept</label><br>
             </div>
-          
-            <button id="reset-fields" type="button">Reset Inputs</button>
             <button id="update-ticket-submit" type="button" >Update Ticket</button>
         </div>
     </div>
     </div>
-    
-</div>
 
+    <div class="user-info hide" id="user-info">
+        <h3>Your Info/h3>
+        //populate this container with user data e.g. name, role, using state user
+    </div>
+    
+</main>
 </body>
 </html>

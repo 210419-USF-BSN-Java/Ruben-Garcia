@@ -93,3 +93,6 @@ main {
     min-width: 70%;
 }
 
+.hide {
+  display: none; 
+}

@@ -14,18 +14,50 @@
 
 </head>
 <body>
-     <p id="resultP"> </p>
-     <div class="reimbursments-list">
-         <button id ="show-pending-request">show your pending requests</button>
-         <button id ="show-resolved-request">show your resolved requests</button>
-     </div>
-    <div class="debugging">
-        <button id="check-user-state">console log user state</button>
-     </div>
-     <div class="logout">
-      <button id="logout">logout</button>
-  </div>
-    <div class="layout">
+            <div id="user-pending-reim-container">
+                <button id ="show-user-pending-reim">show your pending requests</button>
+                <table id="user-pending-reim-table">
+                    <thead>
+                        <tr>
+                            <th>Reimb Id</th>
+                            <th>Reimb Author Id</th>
+                            <th>$ Amount</th>
+                            <th>Description</th>
+                            <th>Reimb Type</th>
+                            <th>Date Submitted</th>
+                        </tr>
+                    </thead>
+                        <tbody id="user-pending-reim-data">
+                            
+                        </tbody>
+                </table>
+            </div>
+            <div id="user-resolved-reim-container">
+                <button id ="show-user-resolved-reim">show your resolved requests</button>
+                <table id="user-resolved-request-table">
+                    <thead>
+                        <tr>
+                            <th>Reimb Id</th>
+                            <th>Reimb Author Id</th>
+                            <th>$ Amount</th>
+                            <th>Description</th>
+                            <th>Reimb Type</th>
+                            <th>Date Submitted</th>
+                            <th>Date Resolved</th>
+                            <th>Resolver Id</th>
+                        </tr>
+                    </thead>
+                        <tbody id="user-resolved-reim-data">
+                            
+                        </tbody>
+                </table>
+            </div>
+            <div class="debugging">
+                <button id="check-user-state">console log user state</button>
+            </div>
+            <div class="logout">
+            <button id="logout">logout</button>
+        </div>
         <div class="employee-things">
             <button id="get-user-info">Get User Info</button>
         </div>
@@ -56,7 +88,7 @@
             </div>
             <button id="employee_reimb_submit" type="button" class="btn btn-black">Submit</button>
         </div>
-    </div>
+   
    
     <div class="edit/view user info">
          <div class="edit-user-info-form> 

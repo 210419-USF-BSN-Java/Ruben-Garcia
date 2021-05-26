@@ -141,13 +141,13 @@ window.onload = getUserInfo;
 
 let pendingReim; 
 let resolvedReim; 
-const viewPendingReimbursementsButton = document.getElementById("show-pending-request")
+const viewPendingReimbursementsButton = document.getElementById("show-user-pending-reim")
 viewPendingReimbursementsButton.addEventListener("click", function(event){
     console.log("pending viewPendingReimbursements funtion called"); 
     getUserPendingReimData()
 })
 
-const viewResolvedReimbursementsButton = document.getElementById("show-resolved-request")
+const viewResolvedReimbursementsButton = document.getElementById("show-user-resolved-reim")
 viewResolvedReimbursementsButton.addEventListener("click", function(event){
     console.log("resolved viewResolvedReimbursements funtion called"); 
     getUserResolvedReimbData()
@@ -155,25 +155,70 @@ viewResolvedReimbursementsButton.addEventListener("click", function(event){
 
 const getUserResolvedReimbData = async function(){
     let data = await fetch("http://localhost:8080/reimbursement-app/getEmployeeResolvedRequest").then(Response => Response.json())
-    .then(data => console.log(data))
-    try{      
-        resolvedReim = JSON.parse(data)
-    } catch(e){
-      resolvedReim = data
-    }
-    console.log(resolvedReim)
+    .then(data => {
+        let temp = ""
+        let reimbType; 
+        console.log(data)
+        if(data.length > 0){
+            data.forEach(element => {
+                if(element.reimb_type_id === 1)reimbType="Lodging" 
+                if(element.reimb_type_id === 2)reimbType="Travel"
+                if(element.reimb_type_id === 3)reimbType="Food" 
+                if(element.reimb_type_id === 4)reimbType="Other"        
+                temp += "<tr>";
+                temp += "<td>"+ element.reimb_id+"</td>"
+                temp += "<td>"+ element.reimb_author+"</td>"
+                temp += "<td>"+ element.reimb_amount +"</td>"
+                temp += "<td>"+ element.reimb_desc +"</td>"
+                temp += "<td>"+ reimbType+"</td>"
+                temp += "<td>" + `${new Date(element.reimb_submitted)}` +"</td>"
+                temp += "<td>" + `${new Date(element.reimb_resolved)}` +"</td>"
+                temp += "<td>" + element.reimb_resolver +"</td>"
+                temp += "</tr>"
+            }) 
+            console.log(temp)
+            let new_tbody = document.createElement('tbody')
+            new_tbody.setAttribute('id', "user-resolved-reim-data")
+            new_tbody.innerHTML = temp; 
+            let old_tbody = document.getElementById("user-resolved-reim-data");
+            old_tbody.parentNode.replaceChild(new_tbody, old_tbody)
+        }
+    })
 }
 
 const getUserPendingReimData = async function getPendingRequest(){
             let data = await fetch("http://localhost:8080/reimbursement-app/getEmployeePendingRequest")
             .then(Response => Response.json())
-            .then(data => console.log(data))
-            try{
-                pendingReim = JSON.parse(data)
-            } catch(e){
-                pendingReim = data
-            }
-            console.log(pendingReim)
+            .then(data => {
+                console.log(data)
+                let temp = ""
+        let reimbType; 
+        console.log(data)
+        if(data.length > 0){
+            data.forEach(element => {
+                if(element.reimb_type_id === 1)reimbType="Lodging" 
+                if(element.reimb_type_id === 2)reimbType="Travel"
+                if(element.reimb_type_id === 3)reimbType="Food" 
+                if(element.reimb_type_id === 4)reimbType="Other"        
+                temp += "<tr>";
+                temp += "<td>"+ element.reimb_id+"</td>"
+                temp += "<td>"+ element.reimb_author+"</td>"
+                temp += "<td>"+ element.reimb_amount +"</td>"
+                temp += "<td>"+ element.reimb_desc +"</td>"
+                temp += "<td>"+ reimbType+"</td>"
+                temp += "<td>" + `${new Date(element.reimb_submitted)}` +"</td>"
+                temp += "</tr>"
+            }) 
+            console.log(temp)
+            let new_tbody = document.createElement('tbody')
+            new_tbody.setAttribute('id', "user-pending-reim-data")
+            new_tbody.innerHTML = temp; 
+            let old_tbody = document.getElementById("user-pending-reim-data");
+            old_tbody.parentNode.replaceChild(new_tbody, old_tbody)
+        }
+
+            })
+            
     }
 
    const editInfoForm = document.getElementById("edit_user_submit"); 

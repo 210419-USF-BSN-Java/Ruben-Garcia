@@ -12,10 +12,10 @@ import model.User;
 public class ManagerService implements ManagerServicesInterface {
 	ReimbDaoPostgres rdp = new ReimbDaoPostgres();
 	UserDaoPostgres up = new UserDaoPostgres(); 
-	List<Reimbursement> allReimbs = rdp.getAll();
 	@Override
 	public List<Reimbursement> viewAllPendingRequest() {
 		// TODO Auto-generated method stub
+		List<Reimbursement> allReimbs = rdp.getAll();
 		int pendingRequest = 1; 
 		// TODO Auto-generated method stub
 		Stream<Reimbursement> list = allReimbs.stream(); 
@@ -27,6 +27,7 @@ public class ManagerService implements ManagerServicesInterface {
 	@Override
 	public List<Reimbursement> viewAllResolvedRequest() {
 		// TODO Auto-generated method stub
+		List<Reimbursement> allReimbs = rdp.getAll();
 		int acceptedRequest = 2;
 		int rejectedRequest = 3;
 		// TODO Auto-generated method stub
@@ -55,8 +56,8 @@ public class ManagerService implements ManagerServicesInterface {
 		User user = up.getByUsername(username);
 		int userId = user.getId();
 		// TODO Auto-generated method stub
-		List<Reimbursement> allreimbs = allReimbs; 
-		Stream<Reimbursement> list = allreimbs.stream(); 
+		List<Reimbursement> allReimbs = rdp.getAll();
+		Stream<Reimbursement> list = allReimbs.stream(); 
 		List<Reimbursement> userReimbHistory =  list.filter(t -> t.getReimb_author()== userId ).collect(Collectors.toList());
 		return userReimbHistory; 
 	}

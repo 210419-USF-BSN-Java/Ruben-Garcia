@@ -28,6 +28,7 @@ public class tester {
 		int r = u.getRoleIdOfUser("benEmployee"); 
 		System.out.println(r);
 		*/
+		/*
 		EmployeeServices es = new EmployeeServices(); 
 		es.viewUserPendingRequests(2); 
 		es.viewUserResolvedRequests(2);
@@ -38,6 +39,8 @@ public class tester {
 		cal.set(Calendar.MILLISECOND, 0);
 		java.sql.Timestamp time = new java.sql.Timestamp(utilDate.getTime()); 
 		System.out.println(time);
+		*/
+		
 		}
 	
 	

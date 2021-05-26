@@ -8,7 +8,6 @@ import java.sql.*;
 
 //variables set up in sys env 
 public class ConnectionUtil {
-    private final static Logger log = Logger.getLogger(ConnectionUtil.class);
     private static Connection connection;
     
     //singleton pattern 

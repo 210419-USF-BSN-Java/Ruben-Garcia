@@ -93,6 +93,7 @@ const sendPostRequestReimbSub = async function sendData(jsDataObject){
 
 
 const getUserInfo = async function getInfo(){
+        let userData;
             let data = await fetch("http://localhost:8080/reimbursement-app/getEmployeeInfo")
             .then(Response => Response.json())
             try{

@@ -10,6 +10,9 @@ The Expense Reimbursement System (ERS) will manage the process of reimbursing em
 * Javascript - es6
 * PostgresSql - version 10.0
 * Tomcat - version 8.5
+* AWS Relational Database Service
+* JDBC API
+* HTML5,CSS3
 
 ## Features
 
